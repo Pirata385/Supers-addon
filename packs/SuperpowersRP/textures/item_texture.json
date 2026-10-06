@@ -1,0 +1,51 @@
+{
+  "resource_pack_name": "superpowers_and_mutants",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "sp_syringe_strength": {
+      "textures": "textures/items/sp_syringe_strength"
+    },
+    "sp_syringe_flight": {
+      "textures": "textures/items/sp_syringe_flight"
+    },
+    "sp_syringe_heat_vision": {
+      "textures": "textures/items/sp_syringe_heat_vision"
+    },
+    "sp_syringe_speedster": {
+      "textures": "textures/items/sp_syringe_speedster"
+    },
+    "sp_syringe_esper": {
+      "textures": "textures/items/sp_syringe_esper"
+    },
+    "sp_syringe_unstable": {
+      "textures": "textures/items/sp_syringe_unstable"
+    },
+    "sp_suppressor_serum": {
+      "textures": "textures/items/sp_suppressor_serum"
+    },
+    "sp_syringe_empty": {
+      "textures": "textures/items/sp_syringe_empty"
+    },
+    "sp_mutagen_crystal": {
+      "textures": "textures/items/sp_mutagen_crystal"
+    },
+    "sp_mutant_codex": {
+      "textures": "textures/items/sp_mutant_codex"
+    },
+    "sp_emblem_strength": {
+      "textures": "textures/items/sp_emblem_strength"
+    },
+    "sp_emblem_flight": {
+      "textures": "textures/items/sp_emblem_flight"
+    },
+    "sp_emblem_heat_vision": {
+      "textures": "textures/items/sp_emblem_heat_vision"
+    },
+    "sp_emblem_speedster": {
+      "textures": "textures/items/sp_emblem_speedster"
+    },
+    "sp_emblem_esper": {
+      "textures": "textures/items/sp_emblem_esper"
+    }
+  }
+}

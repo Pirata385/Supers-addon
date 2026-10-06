@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "sp:mutant_codex",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "textures": {
+          "default": "sp_mutant_codex"
+        }
+      },
+      "minecraft:display_name": {
+        "value": "item.sp:mutant_codex.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:rarity": {
+        "value": "rare"
+      },
+      "minecraft:glint": true,
+      "minecraft:interact_button": true,
+      "sp:codex": {}
+    }
+  }
+}

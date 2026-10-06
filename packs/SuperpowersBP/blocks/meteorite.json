@@ -1,0 +1,41 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:block": {
+    "description": {
+      "identifier": "sp:meteorite",
+      "menu_category": {
+        "category": "nature",
+        "group": "minecraft:itemGroup.name.ore"
+      }
+    },
+    "components": {
+      "minecraft:display_name": "tile.sp:meteorite.name",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "sp_meteorite",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:light_emission": 5,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 8,
+        "item_specific_speeds": [
+          {
+            "item": {
+              "tags": "query.any_tag('minecraft:is_pickaxe')"
+            },
+            "destroy_speed": 4
+          }
+        ]
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 30
+      },
+      "minecraft:map_color": "#35302e",
+      "minecraft:loot": "loot_tables/blocks/meteorite.json",
+      "tag:stone": {},
+      "tag:minecraft:is_pickaxe_item_destructible": {}
+    }
+  }
+}

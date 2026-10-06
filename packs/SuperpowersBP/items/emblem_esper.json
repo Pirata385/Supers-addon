@@ -1,0 +1,42 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "sp:emblem_esper",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "textures": {
+          "default": "sp_emblem_esper"
+        }
+      },
+      "minecraft:display_name": {
+        "value": "item.sp:emblem_esper.name"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:rarity": {
+        "value": "epic"
+      },
+      "minecraft:glint": true,
+      "minecraft:tags": {
+        "tags": [
+          "sp:emblem"
+        ]
+      },
+      "minecraft:food": {
+        "nutrition": 0,
+        "saturation_modifier": 0,
+        "can_always_eat": true
+      },
+      "minecraft:use_modifiers": {
+        "use_duration": 3600,
+        "movement_modifier": 1.0
+      },
+      "minecraft:use_animation": "none",
+      "sp:emblem": {}
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "sp:mutagen_crystal",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": {
+        "textures": {
+          "default": "sp_mutagen_crystal"
+        }
+      },
+      "minecraft:display_name": {
+        "value": "item.sp:mutagen_crystal.name"
+      },
+      "minecraft:max_stack_size": 64,
+      "minecraft:rarity": {
+        "value": "uncommon"
+      }
+    }
+  }
+}
