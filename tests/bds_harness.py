@@ -118,6 +118,9 @@ def main():
     ap.add_argument('--commands', default='', help='semicolon separated console commands after start')
     ap.add_argument('--port', type=int, default=19232, help='IPv4 port (IPv6 uses port+1)')
     ap.add_argument('--wait', type=int, default=15, help='seconds to run when no test pack is given')
+    ap.add_argument('--suites', default='', help='comma separated GameTest suites to run (default: all)')
+    ap.add_argument('--stub-powers-except', default=None,
+                    help="replace every power module except this id (or 'all') with a stub in the server copy")
     args = ap.parse_args()
 
     work = os.path.abspath(args.work)
@@ -148,6 +151,17 @@ def main():
         if os.path.exists(dst):
             shutil.rmtree(dst)
         shutil.copytree(src, dst)
+    if args.stub_powers_except:
+        pdir = os.path.join(srv, 'behavior_packs', 'sp_bp', 'scripts', 'powers')
+        for fn in os.listdir(pdir):
+            pid = fn[:-3]
+            if fn.endswith('.js') and pid != args.stub_powers_except:
+                open(os.path.join(pdir, fn), 'w').write(
+                    "import { definePower } from '../core/powers.js';\ndefinePower('%s', {});\n" % pid)
+    if args.test_pack and args.suites:
+        suites = [x.strip() for x in args.suites.split(',') if x.strip()]
+        open(os.path.join(srv, 'behavior_packs', 'sp_test_bp', 'scripts', 'suite.js'), 'w').write(
+            'export const SUITES = %s;\n' % json.dumps(suites))
 
     set_props(srv, {
         'level-name': level, 'level-type': 'FLAT', 'gamemode': 'creative', 'allow-cheats': 'true',
