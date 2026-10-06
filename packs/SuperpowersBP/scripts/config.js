@@ -257,6 +257,7 @@ export const DEFAULT_PLAYER_SETTINGS = {
   hud: true,
   hints: true,
   screenFx: true, // camera shake, FOV warp, fog tints
+  confirmInjections: true, // ask before injecting a syringe / suppressor
 };
 
 /** Debris entity texture slots (RP entity/debris.entity.json textures, same order). */

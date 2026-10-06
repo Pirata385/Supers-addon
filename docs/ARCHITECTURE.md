@@ -193,10 +193,17 @@ in first person (multiply by `(1 - (variable.is_first_person ?? 0))` where the p
 * `sp:rogue_mutant` — hostile humanoid; `minecraft:variant` 0..3 = strength / heat_vision /
   speedster / esper (glowing eye colour per variant).
 
-### Items
-`sp:syringe_<power>` ×5, `sp:syringe_unstable`, `sp:suppressor_serum`, `sp:syringe_empty`,
-`sp:mutagen_crystal`, `sp:mutant_codex`, `sp:emblem_<power>` ×5. Blocks: `sp:meteorite`,
-`sp:mutagen_tank`.
+### Items (BP `items/`, format_version `1.21.90`, custom components V2 written directly in `components`)
+| item | key components |
+|---|---|
+| `sp:syringe_<power>` ×5 | `"sp:syringe": {"power": "<power id>"}`, stack 16 — instant use, script shows a confirm form then a 0.8 s injection sequence and returns `sp:syringe_empty` |
+| `sp:syringe_unstable` | `"sp:syringe": {"power": "random"}` |
+| `sp:suppressor_serum` | `"sp:suppressor": {}` — removes all powers |
+| `sp:syringe_empty`, `sp:mutagen_crystal` | crafting materials |
+| `sp:mutant_codex` | `"sp:codex": {}`, stack 1, glint — opens the catalog |
+| `sp:emblem_<power>` ×5 | `"sp:emblem": {}`, stack 1, glint, **food-like hold item**: `minecraft:food {nutrition:0, saturation_modifier:0, can_always_eat:true}`, `minecraft:use_modifiers {use_duration:3600, movement_modifier:1.0}`, `minecraft:use_animation "none"` (never completes, so it is never eaten) |
+
+Blocks: `sp:meteorite` (ore-like, glows, drops 1–3 `sp:mutagen_crystal`), `sp:mutagen_tank` (decorative glowing glass tank).
 
 ### HUD glyphs
 `font/glyph_E7.png` (256×256, 16 px cells). Code points listed in `config.js` `GLYPH`.
