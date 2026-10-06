@@ -226,6 +226,12 @@ in first person (multiply by `(1 - (variable.is_first_person ?? 0))` where the p
 
 Blocks: `sp:meteorite` (ore-like, glows, drops 1–3 `sp:mutagen_crystal`), `sp:mutagen_tank` (decorative glowing glass tank).
 
+### Texture paths
+* Item sprites `textures/items/sp_<item>.png` (atlas key `sp_<item>`), block textures
+  `textures/blocks/sp_meteorite.png`, `sp_mutagen_tank_{side,top,glass,fluid}.png`, tank geometry
+  `geometry.sp.mutagen_tank`, Codex icons `textures/sp/ui/<name>.png` (64×64).
+* `python3 tools/gen_item_art.py --check` validates the item/block/UI art references.
+
 ### HUD glyphs
 `font/glyph_E7.png` (256×256, 16 px cells). Code points listed in `config.js` `GLYPH`.
 
