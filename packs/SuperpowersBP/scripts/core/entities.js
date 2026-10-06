@@ -5,6 +5,7 @@ import * as V from './math.js';
 import * as fx from './fx.js';
 import { breakBlock, getBlockSafe, tierOf } from './blocks.js';
 import { ENTITIES } from '../config.js';
+import { currentOwner } from './context.js';
 
 /** Entity types that are never valid power targets. */
 const NON_TARGETS = new Set([
@@ -107,9 +108,41 @@ export function damage(target, amount, source, cause = EntityDamageCause.entityA
 // Solving for F / Vy lets us set an exact velocity on players, which have no applyImpulse.
 const KB_SCALE = 0.4;
 
-/** Set an entity's velocity as exactly as the engine allows. */
-export function setVelocity(entity, v) {
+/** @type {Map<string, {owner:string, until:number}>} */
+const motionLocks = new Map();
+
+/**
+ * Reserve an entity's motion for `ticks` ticks: setVelocity calls made by other powers are
+ * ignored meanwhile (e.g. a Super Strength dash is not cancelled by Flight's hover control).
+ */
+export function lockMotion(entity, ticks, owner = currentOwner() ?? 'misc') {
   if (!isValid(entity)) return;
+  motionLocks.set(entity.id, { owner, until: system.currentTick + Math.max(1, ticks) });
+}
+
+export function unlockMotion(entity, owner = currentOwner()) {
+  const l = motionLocks.get(entity?.id);
+  if (l && (!owner || l.owner === owner)) motionLocks.delete(entity.id);
+}
+
+/** True when another owner currently holds the entity's motion. */
+export function motionLocked(entity, owner = currentOwner()) {
+  const l = motionLocks.get(entity?.id);
+  if (!l) return false;
+  if (l.until < system.currentTick) {
+    motionLocks.delete(entity.id);
+    return false;
+  }
+  return l.owner !== (owner ?? 'misc');
+}
+
+/**
+ * Set an entity's velocity as exactly as the engine allows.
+ * Ignored while another power holds a motion lock on the entity unless opts.force.
+ */
+export function setVelocity(entity, v, opts = undefined) {
+  if (!isValid(entity)) return;
+  if (!opts?.force && motionLocked(entity)) return;
   try {
     if (entity.typeId === 'minecraft:player') {
       const c = entity.getVelocity();
@@ -143,7 +176,17 @@ export function addVelocity(entity, dv) {
 export function knockFrom(target, from, horizontal, lift) {
   const d = V.hnorm(V.sub(target.location, from));
   const dir = d.x === 0 && d.z === 0 ? V.randomUnit() : d;
-  setVelocity(target, { x: dir.x * horizontal, y: lift, z: dir.z * horizontal });
+  launch(target, { x: dir.x * horizontal, y: lift, z: dir.z * horizontal });
+}
+
+/**
+ * Launch an entity hit by a power. Overrides (and briefly locks) the victim's own motion
+ * control, so e.g. a flying player hit by a Thunderclap is really blown away.
+ */
+export function launch(target, v, lockTicks = 8) {
+  if (!isValid(target)) return;
+  setVelocity(target, v, { force: true });
+  if (target.typeId === 'minecraft:player') motionLocks.set(target.id, { owner: 'external', until: system.currentTick + lockTicks });
 }
 
 /** Eye position of an entity (falls back to location + 1.6). */

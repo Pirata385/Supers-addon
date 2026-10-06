@@ -6,6 +6,7 @@ import { validateHold } from './input.js';
 import { updateHud } from './hud.js';
 import { tickThrown } from './entities.js';
 import { tickLights, restoreStaleLights } from './fx.js';
+import { withOwner } from './context.js';
 
 /** @type {{name:string, fn:(tick:number)=>void}[]} */
 const globalTickers = [];
@@ -29,7 +30,7 @@ function guard(name, fn) {
 function lifecycle(player, hook, ...args) {
   if (!hasRuntime(player.id)) return;
   const r = rt(player);
-  for (const id of r.powers) guard(`${id}.${hook}`, () => handlersOf(id)[hook]?.(player, r, ...args));
+  for (const id of r.powers) guard(`${id}.${hook}`, () => withOwner(id, () => handlersOf(id)[hook]?.(player, r, ...args)));
 }
 
 export function startLoop() {
@@ -42,7 +43,7 @@ export function startLoop() {
       guard('validateHold', () => validateHold(player));
       for (const id of r.powers) {
         const h = handlersOf(id);
-        if (h.tick) guard(`${id}.tick`, () => h.tick(player, r, tick));
+        if (h.tick) guard(`${id}.tick`, () => withOwner(id, () => h.tick(player, r, tick)));
       }
       guard('immunity', () => updateImmunity(player, r));
       if ((tick + r.id.length) % 4 === 0) guard('hud', () => updateHud(player));
@@ -72,7 +73,7 @@ export function startLoop() {
         const r = rt(p);
         for (const pid of r.powers) {
           const h = handlersOf(pid);
-          if (h.onLeave) system.run(() => guard(`${pid}.onLeave`, () => h.onLeave(p, r)));
+          if (h.onLeave) system.run(() => guard(`${pid}.onLeave`, () => withOwner(pid, () => h.onLeave(p, r))));
         }
       }
     } catch {

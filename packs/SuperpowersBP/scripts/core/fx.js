@@ -1,6 +1,7 @@
 // Visual / audio feedback helpers. All calls are defensive: effects must never break gameplay.
 import { world, system, MolangVariableMap, EasingType } from '@minecraft/server';
 import { rt } from './state.js';
+import { currentOwner } from './context.js';
 import * as V from './math.js';
 
 /**
@@ -100,22 +101,37 @@ export function shakeArea(dim, center, radius, intensity, seconds) {
   }
 }
 
-/** Field of view warp (e.g. high speed). */
+/**
+ * Field of view warp (e.g. high speed). Each power owns one FOV request; the widest active
+ * request wins, so one power resetting its FOV never cancels another power's warp.
+ */
 export function fov(player, value, easeTime = 0.35) {
-  if (!screenFx(player)) return;
-  try {
-    player.camera.setFov({ fov: value, easeOptions: { easeTime, easeType: EasingType.OutQuad } });
-  } catch {
-    /* ignore */
-  }
+  const r = rt(player);
+  r.input.fovs ??= {};
+  r.input.fovs[currentOwner() ?? 'misc'] = value;
+  applyFov(player, r, easeTime);
 }
 
+/** Drop the calling power's FOV request (outside a power handler: drop all requests). */
 export function resetFov(player, easeTime = 0.4) {
+  const r = rt(player);
+  const owner = currentOwner();
+  if (owner && r.input.fovs) delete r.input.fovs[owner];
+  else r.input.fovs = {};
+  applyFov(player, r, easeTime);
+}
+
+function applyFov(player, r, easeTime) {
+  const vals = Object.values(r.input.fovs ?? {});
+  const target = vals.length && screenFx(player) ? Math.max(...vals) : null;
+  if (target === (r.input.fovApplied ?? null)) return;
+  r.input.fovApplied = target;
   try {
-    player.camera.setFov({ easeOptions: { easeTime, easeType: EasingType.OutQuad } });
+    if (target === null) player.camera.setFov({ easeOptions: { easeTime, easeType: EasingType.OutQuad } });
+    else player.camera.setFov({ fov: target, easeOptions: { easeTime, easeType: EasingType.OutQuad } });
   } catch {
     try {
-      player.camera.setFov();
+      if (target === null) player.camera.setFov();
     } catch {
       /* ignore */
     }
@@ -153,20 +169,70 @@ export function anim(entity, animation, controller = 'sp_action', stopExpression
   }
 }
 
-/** Start a looping pose that lasts until replaced/stopped. */
-export function pose(player, animation) {
-  const r = rt(player);
-  if (r.input.pose === animation) return;
-  r.input.pose = animation;
-  anim(player, animation, 'sp_pose', '0', 0.2);
+/** Priority of looping poses when several powers request one at the same time. */
+const POSE_PRIORITY = {
+  'animation.sp.strength.lift': 90,
+  'animation.sp.strength.charge': 85,
+  'animation.sp.strength.dash': 80,
+  'animation.sp.heat.beam': 75,
+  'animation.sp.esper.channel': 70,
+  'animation.sp.flight.carry': 60,
+  'animation.sp.speed.run': 40,
+  'animation.sp.flight.cruise': 30,
+  'animation.sp.flight.hover': 20,
+};
+const POWER_POSE_GROUP = { heat_vision: 'heat', speedster: 'speed' };
+
+function poseGroup(animation) {
+  const m = /^animation\.sp\.([a-z_]+)\./.exec(animation);
+  return m ? m[1] : 'misc';
 }
 
+function applyPose(player, r) {
+  let best = null;
+  let bestP = -1;
+  for (const k in r.input.poses) {
+    const a = r.input.poses[k];
+    const pr = POSE_PRIORITY[a] ?? 50;
+    if (pr > bestP) {
+      best = a;
+      bestP = pr;
+    }
+  }
+  if (best === (r.input.pose ?? null)) return;
+  r.input.pose = best;
+  if (best) anim(player, best, 'sp_pose', '0', 0.2);
+  else anim(player, 'animation.sp.reset', 'sp_pose', 'query.any_animation_finished', 0.25);
+}
+
+/**
+ * Request a looping body pose (controller 'sp_pose'). Each power keeps at most one request;
+ * the highest-priority request is displayed. Cheap to call every tick.
+ */
+export function pose(player, animation) {
+  const r = rt(player);
+  r.input.poses ??= {};
+  const g = poseGroup(animation);
+  if (r.input.poses[g] !== animation) r.input.poses[g] = animation;
+  applyPose(player, r);
+}
+
+/**
+ * Withdraw a pose request: a specific animation, or (without argument) the request of the
+ * power currently executing; outside a power handler every request is cleared.
+ */
 export function stopPose(player, animation) {
   const r = rt(player);
-  if (animation && r.input.pose !== animation) return;
-  if (!r.input.pose) return;
-  r.input.pose = null;
-  anim(player, 'animation.sp.reset', 'sp_pose', 'query.any_animation_finished', 0.25);
+  r.input.poses ??= {};
+  if (animation) {
+    const g = poseGroup(animation);
+    if (r.input.poses[g] === animation) delete r.input.poses[g];
+  } else {
+    const owner = currentOwner();
+    if (owner) delete r.input.poses[POWER_POSE_GROUP[owner] ?? owner];
+    else r.input.poses = {};
+  }
+  applyPose(player, r);
 }
 
 export function title(player, text, sub, fadeIn = 4, stay = 30, fadeOut = 10) {

@@ -3,6 +3,7 @@ import { world, system, ItemStack, ItemLockMode } from '@minecraft/server';
 import { POWERS, POWER_IDS, MAX_POWERS, IMMUNITY_TAGS, GLYPH } from '../config.js';
 import { rt, savePowers, selectedAbility, pdata, discover } from './state.js';
 import * as fx from './fx.js';
+import { withOwner } from './context.js';
 
 /**
  * @typedef {import('@minecraft/server').Player} Player
@@ -133,7 +134,7 @@ export function grantPower(player, power, opts = {}) {
   if (opts.emblem !== false) giveEmblem(player, power);
   discover(player, `power:${power}`);
   try {
-    handlersOf(power).onGain?.(player, r);
+    withOwner(power, () => handlersOf(power).onGain?.(player, r));
   } catch (e) {
     console.warn(`[SP] onGain ${power}: ${e}`);
   }
@@ -153,7 +154,7 @@ export function revokePower(player, power, opts = {}) {
   if (!r.powers.includes(power)) return false;
   if (r.hold?.power === power) endHold(player, 'revoked');
   try {
-    handlersOf(power).onLose?.(player, r);
+    withOwner(power, () => handlersOf(power).onLose?.(player, r));
   } catch (e) {
     console.warn(`[SP] onLose ${power}: ${e}`);
   }
@@ -207,7 +208,7 @@ export function restorePlayer(player) {
   r.tags.clear();
   for (const id of r.powers) {
     try {
-      handlersOf(id).onJoin?.(player, r);
+      withOwner(id, () => handlersOf(id).onJoin?.(player, r));
     } catch (e) {
       console.warn(`[SP] onJoin ${id}: ${e}`);
     }
@@ -229,7 +230,7 @@ export function updateImmunity(player, r = rt(player)) {
   for (const id of r.powers) {
     let f;
     try {
-      f = handlersOf(id).flags?.(player, r);
+      f = withOwner(id, () => handlersOf(id).flags?.(player, r));
     } catch {
       f = undefined;
     }
@@ -286,7 +287,7 @@ export function tryActivate(player, power, ability) {
   }
   let result;
   try {
-    result = handlersOf(power).activate?.(player, r, ability);
+    result = withOwner(power, () => handlersOf(power).activate?.(player, r, ability));
   } catch (e) {
     console.warn(`[SP] ${power}.${ability} failed: ${e}\n${e?.stack ?? ''}`);
     return false;
@@ -311,7 +312,7 @@ export function beginHold(player, power, ability) {
   r.hold = { power, ability, start: system.currentTick, slot: player.selectedSlotIndex };
   let ok;
   try {
-    ok = handlersOf(power).holdStart?.(player, r, ability);
+    ok = withOwner(power, () => handlersOf(power).holdStart?.(player, r, ability));
   } catch (e) {
     console.warn(`[SP] holdStart ${power}.${ability}: ${e}\n${e?.stack ?? ''}`);
     ok = false;
@@ -331,7 +332,7 @@ export function endHold(player, reason = 'release', sneaking = undefined) {
   r.hold = null;
   const info = { duration: system.currentTick - h.start, sneaking: sneaking ?? safeSneaking(player), reason };
   try {
-    handlersOf(h.power).holdEnd?.(player, r, h.ability, info);
+    withOwner(h.power, () => handlersOf(h.power).holdEnd?.(player, r, h.ability, info));
   } catch (e) {
     console.warn(`[SP] holdEnd ${h.power}.${h.ability}: ${e}\n${e?.stack ?? ''}`);
   }

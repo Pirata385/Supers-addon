@@ -79,6 +79,20 @@ Jump/Sneak = intensity ±1; Esper Telekinesis: Jump/Sneak = push/pull).
 Movement input: `moveInput(p)` from `core/input.js` returns `{x: left+/right-, y: forward+/back-}`
 (supports test overrides). `buttonDown(p, 'Jump'|'Sneak')` for held state.
 
+## Coexistence (several powers at once)
+Handlers run inside an *owner context* (`core/context.js`), so shared player resources are
+arbitrated automatically:
+* **Poses** — `fx.pose` keeps one request per power; the highest priority wins
+  (lift > charge > dash > heat beam > esper channel > carry > speed run > cruise > hover).
+  `fx.stopPose(p)` inside a handler withdraws only that power's request.
+* **FOV** — `fx.fov` keeps one request per power; the widest wins; `fx.resetFov` drops only the
+  caller's request.
+* **Motion** — `entities.lockMotion(p, ticks)` reserves the player's velocity for an ability
+  (dash, leap, blitz recoil...): `setVelocity` calls from other powers are ignored meanwhile.
+  `entities.launch(target, v)` (used by `knockFrom`) forces a knock and briefly locks the
+  victim's own motion control, so e.g. a flying player hit by a Thunderclap really flies away.
+  Continuous controllers (Flight) should check `motionLocked(p)` and simply skip that tick.
+
 ## Engine facts measured on BDS 1.26.3 (do not re-derive)
 
 * `entities.setVelocity(e, v)` sets an exact next-tick velocity for players (knockback solve,

@@ -4,6 +4,7 @@ import { POWERS, POWER_IDS, GLYPH } from '../config.js';
 import { rt, selectedAbility, selectAbility } from './state.js';
 import { tryActivate, beginHold, endHold, handlersOf, cooldownLeft } from './powers.js';
 import * as fx from './fx.js';
+import { withOwner } from './context.js';
 
 const EMBLEM_TO_POWER = new Map(POWER_IDS.map((id) => [POWERS[id].emblem, id]));
 
@@ -119,7 +120,7 @@ export function registerInput() {
     const r = rt(/** @type {Player} */ (src));
     for (const id of r.powers) {
       try {
-        handlersOf(id).onMelee?.(/** @type {Player} */ (src), r, ev.hitEntity);
+        withOwner(id, () => handlersOf(id).onMelee?.(/** @type {Player} */ (src), r, ev.hitEntity));
       } catch (e) {
         console.warn(`[SP] onMelee ${id}: ${e}`);
       }
@@ -147,7 +148,7 @@ export function handleButton(player, button, pressed) {
   }
   for (const id of r.powers) {
     try {
-      handlersOf(id).onButton?.(player, r, button, pressed, tick);
+      withOwner(id, () => handlersOf(id).onButton?.(player, r, button, pressed, tick));
     } catch (e) {
       console.warn(`[SP] onButton ${id}: ${e}`);
     }
