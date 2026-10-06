@@ -1,0 +1,45 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Superpowers & Mutants §7[Resources]",
+    "description": "Textures, models, animations, particles, sounds and UI for Superpowers & Mutants.",
+    "uuid": "3a997564-7e60-4768-9458-e1d7d7e873bc",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "description": "Superpowers & Mutants resources",
+      "type": "resources",
+      "uuid": "fc39b0e2-3687-434b-acb6-a20d6c387dc7",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "fa2c7d3b-4d4a-4387-be10-f6c3ea305cc3",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "Superpowers & Mutants team"
+    ]
+  }
+}

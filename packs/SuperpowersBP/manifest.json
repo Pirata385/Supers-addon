@@ -1,0 +1,65 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Superpowers & Mutants §7[Behavior]",
+    "description": "Inject mutagens, wield up to three superpowers at once and survive the Rogue Mutants. Requires the Superpowers & Mutants resource pack (bundled).",
+    "uuid": "fa2c7d3b-4d4a-4387-be10-f6c3ea305cc3",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      26,
+      0
+    ]
+  },
+  "modules": [
+    {
+      "description": "Superpowers & Mutants gameplay data",
+      "type": "data",
+      "uuid": "d703dd5c-5028-4752-b56c-0d6dd74beaab",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "description": "Superpowers & Mutants power engine",
+      "type": "script",
+      "language": "javascript",
+      "uuid": "06238ed7-547f-46aa-8422-31a5a7b4d5cc",
+      "version": [
+        1,
+        0,
+        0
+      ],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "3a997564-7e60-4768-9458-e1d7d7e873bc",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.5.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    }
+  ],
+  "metadata": {
+    "authors": [
+      "Superpowers & Mutants team"
+    ]
+  }
+}
