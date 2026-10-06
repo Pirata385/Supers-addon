@@ -51,7 +51,7 @@ world.afterEvents.playerBreakBlock.subscribe((ev) => {
 onTick('discovery', (tick) => {
   if (tick % 40 !== 0) return;
   for (const p of world.getAllPlayers()) {
-    if (!p.isValid) continue;
+    if (!p || !p.isValid) continue;
     const l = p.location;
     let lab = false, crash = false;
     try {

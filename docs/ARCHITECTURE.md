@@ -109,6 +109,13 @@ arbitrated automatically:
 
 ## Immunity (player.json damage_sensor, first match wins)
 
+Implementation detail measured on BDS 1.26.3 (player.json keeps vanilla's format 1.21.0):
+string `"deals_damage": "no"` is ignored in that format, and any cause-specific `"fall"` trigger
+makes *every* player fall-immune regardless of filters. Each rule is therefore written as
+`"cause": "all"` + `all_of[has_tag <tag>, has_damage <cause>]` + boolean `"deals_damage": false`,
+which is honoured per player (verified for every tag below).
+
+
 | tag | effect |
 |---|---|
 | `sp_nofall` | fall damage cancelled |

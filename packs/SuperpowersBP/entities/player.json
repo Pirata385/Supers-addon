@@ -184,79 +184,120 @@
           {
             "on_damage": {
               "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_nofall"
+                "all_of": [
+                  {
+                    "test": "has_tag",
+                    "subject": "self",
+                    "value": "sp_nofall"
+                  },
+                  {
+                    "test": "has_damage",
+                    "subject": "self",
+                    "value": "fall"
+                  }
+                ]
               }
             },
-            "cause": "fall",
-            "deals_damage": "no"
+            "cause": "all",
+            "deals_damage": false
           },
           {
             "on_damage": {
               "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_nokinetic"
+                "all_of": [
+                  {
+                    "test": "has_tag",
+                    "subject": "self",
+                    "value": "sp_nokinetic"
+                  },
+                  {
+                    "test": "has_damage",
+                    "subject": "self",
+                    "value": "fly_into_wall"
+                  }
+                ]
               }
             },
-            "cause": "fly_into_wall",
-            "deals_damage": "no"
+            "cause": "all",
+            "deals_damage": false
           },
           {
             "on_damage": {
               "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_dodge"
+                "all_of": [
+                  {
+                    "test": "has_tag",
+                    "subject": "self",
+                    "value": "sp_dodge"
+                  },
+                  {
+                    "test": "has_damage",
+                    "subject": "self",
+                    "value": "projectile"
+                  }
+                ]
               }
             },
-            "cause": "projectile",
-            "deals_damage": "no"
+            "cause": "all",
+            "deals_damage": false
           },
           {
             "on_damage": {
               "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_blastproof"
+                "all_of": [
+                  {
+                    "test": "has_tag",
+                    "subject": "self",
+                    "value": "sp_blastproof"
+                  },
+                  {
+                    "any_of": [
+                      {
+                        "test": "has_damage",
+                        "subject": "self",
+                        "value": "entity_explosion"
+                      },
+                      {
+                        "test": "has_damage",
+                        "subject": "self",
+                        "value": "block_explosion"
+                      }
+                    ]
+                  }
+                ]
               }
             },
-            "cause": "entity_explosion",
-            "deals_damage": "no"
+            "cause": "all",
+            "deals_damage": false
           },
           {
             "on_damage": {
               "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_blastproof"
+                "all_of": [
+                  {
+                    "test": "has_tag",
+                    "subject": "self",
+                    "value": "sp_fireproof"
+                  },
+                  {
+                    "any_of": [
+                      {
+                        "test": "has_damage",
+                        "subject": "self",
+                        "value": "fire"
+                      },
+                      {
+                        "test": "has_damage",
+                        "subject": "self",
+                        "value": "fire_tick"
+                      }
+                    ]
+                  }
+                ]
               }
             },
-            "cause": "block_explosion",
-            "deals_damage": "no"
-          },
-          {
-            "on_damage": {
-              "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_fireproof"
-              }
-            },
-            "cause": "fire",
-            "deals_damage": "no"
-          },
-          {
-            "on_damage": {
-              "filters": {
-                "test": "has_tag",
-                "subject": "self",
-                "value": "sp_fireproof"
-              }
-            },
-            "cause": "fire_tick",
-            "deals_damage": "no"
+            "cause": "all",
+            "deals_damage": false
           },
           {
             "on_damage": {
@@ -267,7 +308,7 @@
               }
             },
             "cause": "all",
-            "deals_damage": "yes",
+            "deals_damage": true,
             "damage_multiplier": 0.35
           }
         ]

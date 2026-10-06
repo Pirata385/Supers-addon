@@ -37,7 +37,7 @@ export function startLoop() {
   system.runInterval(() => {
     const tick = system.currentTick;
     for (const player of world.getAllPlayers()) {
-      if (!player.isValid) continue;
+      if (!player || !player.isValid) continue;
       const r = rt(player);
       if (!r.powers.length) continue;
       guard('validateHold', () => validateHold(player));
@@ -100,6 +100,6 @@ export function startLoop() {
 
   world.afterEvents.worldLoad.subscribe(() => {
     restoreStaleLights();
-    for (const p of world.getAllPlayers()) guard('restore', () => restorePlayer(p));
+    for (const p of world.getAllPlayers()) if (p) guard('restore', () => restorePlayer(p));
   });
 }

@@ -374,7 +374,7 @@ export function poweredPlayers() {
   const out = [];
   for (const p of world.getAllPlayers()) {
     try {
-      if (rt(p).powers.length) out.push(p);
+      if (p && rt(p).powers.length) out.push(p);
     } catch {
       /* ignore */
     }

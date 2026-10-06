@@ -95,7 +95,7 @@ export function registerCommands(registry) {
 
 // ---------------------------------------------------------------- scriptevent debug API
 function findPlayer(name) {
-  return world.getAllPlayers().find((p) => p.name === name);
+  return world.getAllPlayers().find((p) => p && p.name === name);
 }
 
 function reply(kind, payload) {

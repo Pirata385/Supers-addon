@@ -26,8 +26,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, 'tools'))
 import nbt  # noqa: E402
 
-BP = os.path.join(ROOT, 'packs', 'SuperpowersBP')
-RP = os.path.join(ROOT, 'packs', 'SuperpowersRP')
+BP = os.environ.get('SP_BP_DIR') or os.path.join(ROOT, 'packs', 'SuperpowersBP')
+RP = os.environ.get('SP_RP_DIR') or os.path.join(ROOT, 'packs', 'SuperpowersRP')
 
 
 def manifest(path):
@@ -118,6 +118,8 @@ def main():
     ap.add_argument('--commands', default='', help='semicolon separated console commands after start')
     ap.add_argument('--port', type=int, default=19232, help='IPv4 port (IPv6 uses port+1)')
     ap.add_argument('--wait', type=int, default=15, help='seconds to run when no test pack is given')
+    ap.add_argument('--test-api', default=None,
+                    help="@minecraft/server beta version for the test pack (default: auto from the BDS version, e.g. 2.6.0-beta for 1.26.3)")
     ap.add_argument('--suites', default='', help='comma separated GameTest suites to run (default: all)')
     ap.add_argument('--stub-powers-except', default=None,
                     help="replace every power module except this id (or 'all') with a stub in the server copy")
@@ -158,6 +160,40 @@ def main():
             if fn.endswith('.js') and pid != args.stub_powers_except:
                 open(os.path.join(pdir, fn), 'w').write(
                     "import { definePower } from '../core/powers.js';\ndefinePower('%s', {});\n" % pid)
+    if args.test_pack:
+        api = args.test_api
+        if not api:
+            # The newest vanilla_1.26.x behavior pack shipped with the server tells its version.
+            vers = [d for d in os.listdir(os.path.join(srv, 'behavior_packs')) if d.startswith('vanilla_1.26.')]
+            minor = max((int(d.split('.')[-1]) for d in vers), default=0)
+            api = {0: '2.6.0-beta', 10: '2.7.0-beta', 20: '2.8.0-beta', 30: '2.9.0-beta',
+                   40: '2.10.0-beta', 50: '2.11.0-beta'}.get(minor, '2.6.0-beta')
+        ui_api = {'2.6.0-beta': '2.1.0-beta', '2.7.0-beta': '2.1.0-beta', '2.8.0-beta': '2.1.0-beta',
+                  '2.9.0-beta': '2.2.0-beta', '2.10.0-beta': '2.2.0-beta', '2.11.0-beta': '2.3.0-beta'}.get(api, '2.1.0-beta')
+        # Simulated players created by the GameTest module can only be wrapped by script
+        # contexts that load that module. In the private server copy ONLY, switch the add-on
+        # to the matching beta API + GameTest so it can see the simulated players; the shipped
+        # manifest keeps the stable 2.5.0 / 2.0.0 versions.
+        bpm_path = os.path.join(srv, 'behavior_packs', 'sp_bp', 'manifest.json')
+        bpm = json.load(open(bpm_path))
+        deps = [d for d in bpm['dependencies'] if d.get('module_name') not in ('@minecraft/server', '@minecraft/server-ui', '@minecraft/server-gametest')]
+        deps += [{'module_name': '@minecraft/server', 'version': api},
+                 {'module_name': '@minecraft/server-ui', 'version': ui_api},
+                 {'module_name': '@minecraft/server-gametest', 'version': '1.0.0-beta'}]
+        bpm['dependencies'] = deps
+        json.dump(bpm, open(bpm_path, 'w'), indent=2)
+        # keep a tiny import so the module is actually loaded in the add-on context
+        main_js = os.path.join(srv, 'behavior_packs', 'sp_bp', 'scripts', 'main.js')
+        src = open(main_js).read()
+        if '@minecraft/server-gametest' not in src:
+            open(main_js, 'w').write("import '@minecraft/server-gametest';\n" + src)
+        mp = os.path.join(srv, 'behavior_packs', 'sp_test_bp', 'manifest.json')
+        m = json.load(open(mp))
+        for dep in m['dependencies']:
+            if dep.get('module_name') == '@minecraft/server':
+                dep['version'] = api
+        json.dump(m, open(mp, 'w'), indent=2)
+        print(f'[HARNESS] test mode: add-on + test pack use @minecraft/server {api}, server-ui {ui_api}')
     if args.test_pack and args.suites:
         suites = [x.strip() for x in args.suites.split(',') if x.strip()]
         open(os.path.join(srv, 'behavior_packs', 'sp_test_bp', 'scripts', 'suite.js'), 'w').write(
@@ -168,7 +204,7 @@ def main():
         'online-mode': 'false', 'content-log-console-output-enabled': 'true', 'content-log-level': 'info',
         'content-log-file-enabled': 'false', 'view-distance': '10', 'tick-distance': '4',
         'server-port': str(args.port), 'server-portv6': str(args.port + 1), 'enable-lan-visibility': 'false',
-        'difficulty': 'normal',
+        'difficulty': 'normal', 'allow-list': 'false',
     })
 
     # First boot creates the world (and level.dat); then enable experiments + packs.

@@ -4,8 +4,9 @@
 Outputs (behavior pack):
   structures/sp/mutagen_lab.mcstructure   -> structure id "sp:mutagen_lab"
   structures/sp/meteor_crash.mcstructure  -> structure id "sp:meteor_crash"
-  features/sp_mutagen_lab_feature.json, features/sp_meteor_crash_feature.json
-  feature_rules/sp_mutagen_lab_rule.json, feature_rules/sp_meteor_crash_rule.json
+  features/mutagen_lab_feature.json, features/meteor_crash_feature.json
+  feature_rules/mutagen_lab_rule.json, feature_rules/meteor_crash_rule.json
+  (file names must equal the identifier's name part)
   loot_tables/chests/sp_mutagen_lab.json
 
 Deterministic: running it twice produces identical files.
@@ -261,7 +262,7 @@ def main():
                                                      'minecraft:granite', 'minecraft:diorite', 'minecraft:deepslate',
                                                      'minecraft:tuff', 'minecraft:clay', 'minecraft:snow']}}),
     ):
-        write(os.path.join(BP, 'features', f'sp_{name}_feature.json'), {
+        write(os.path.join(BP, 'features', f'{name}_feature.json'), {
             'format_version': '1.13.0',
             'minecraft:structure_template_feature': {
                 'description': {'identifier': f'sp:{name}_feature'},
@@ -271,7 +272,7 @@ def main():
                 'constraints': constraints,
             },
         })
-        write(os.path.join(BP, 'feature_rules', f'sp_{name}_rule.json'), {
+        write(os.path.join(BP, 'feature_rules', f'{name}_rule.json'), {
             'format_version': '1.13.0',
             'minecraft:feature_rules': {
                 'description': {'identifier': f'sp:{name}_rule', 'places_feature': f'sp:{name}_feature'},
