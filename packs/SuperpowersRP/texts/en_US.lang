@@ -1,0 +1,33 @@
+## Superpowers & Mutants - English (US)
+
+pack.name=Superpowers & Mutants
+pack.description=Textures, models, animations, particles, sounds and UI for Superpowers & Mutants.
+
+## Mutagens and serums
+item.sp:syringe_strength.name=Super Strength Mutagen
+item.sp:syringe_flight.name=Flight Mutagen
+item.sp:syringe_heat_vision.name=Heat Vision Mutagen
+item.sp:syringe_speedster.name=Speedster Mutagen
+item.sp:syringe_esper.name=Esper Mutagen
+item.sp:syringe_unstable.name=Unstable Mutagen
+item.sp:suppressor_serum.name=Suppressor Serum
+item.sp:syringe_empty.name=Empty Syringe
+item.sp:mutagen_crystal.name=Mutagen Crystal
+item.sp:mutant_codex.name=Mutant Codex
+
+## Power emblems
+item.sp:emblem_strength.name=Super Strength Emblem
+item.sp:emblem_flight.name=Flight Emblem
+item.sp:emblem_heat_vision.name=Heat Vision Emblem
+item.sp:emblem_speedster.name=Speedster Emblem
+item.sp:emblem_esper.name=Esper Emblem
+
+## Blocks
+tile.sp:meteorite.name=Meteorite
+tile.sp:mutagen_tank.name=Mutagen Tank
+
+## Entities
+entity.sp:rogue_mutant.name=Rogue Mutant
+item.spawn_egg.entity.sp:rogue_mutant.name=Rogue Mutant Spawn Egg
+entity.sp:debris.name=Debris
+entity.sp:meteor.name=Meteor

@@ -1,0 +1,23 @@
+{
+  "resource_pack_name": "superpowers_and_mutants",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "sp_meteorite": {
+      "textures": "textures/blocks/sp_meteorite"
+    },
+    "sp_mutagen_tank_side": {
+      "textures": "textures/blocks/sp_mutagen_tank_side"
+    },
+    "sp_mutagen_tank_top": {
+      "textures": "textures/blocks/sp_mutagen_tank_top"
+    },
+    "sp_mutagen_tank_glass": {
+      "textures": "textures/blocks/sp_mutagen_tank_glass"
+    },
+    "sp_mutagen_tank_fluid": {
+      "textures": "textures/blocks/sp_mutagen_tank_fluid"
+    }
+  }
+}

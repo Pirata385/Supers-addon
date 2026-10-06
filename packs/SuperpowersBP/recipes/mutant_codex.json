@@ -1,0 +1,31 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "sp:mutant_codex"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "minecraft:book"
+      },
+      {
+        "item": "sp:mutagen_crystal"
+      },
+      {
+        "item": "minecraft:ender_pearl"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "sp:mutagen_crystal"
+      }
+    ],
+    "result": {
+      "item": "sp:mutant_codex",
+      "count": 1
+    }
+  }
+}

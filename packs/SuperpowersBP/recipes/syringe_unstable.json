@@ -1,0 +1,40 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "sp:syringe_unstable"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "sp:syringe_empty"
+      },
+      {
+        "item": "sp:mutagen_crystal"
+      },
+      {
+        "item": "sp:mutagen_crystal"
+      },
+      {
+        "item": "sp:mutagen_crystal"
+      },
+      {
+        "item": "minecraft:nether_wart"
+      }
+    ],
+    "unlock": [
+      {
+        "item": "sp:mutagen_crystal"
+      },
+      {
+        "item": "sp:syringe_empty"
+      }
+    ],
+    "result": {
+      "item": "sp:syringe_unstable",
+      "count": 1
+    }
+  }
+}
