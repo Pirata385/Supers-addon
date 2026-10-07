@@ -371,7 +371,9 @@ async function suite(ctx, p, hurtLog) {
     await ctx.sp('cd', NAME);
     await place(-44, -10);
     if (debrisType) {
-      p.lookAtLocation(ctx.at(-44, -0.5, -7));
+      // rip the boulder from beside the dash lane: a randomly shaped (sometimes 2-deep)
+      // hole straight ahead would legitimately stop the dash at its far edge
+      p.lookAtLocation(ctx.at(-47, -0.5, -10));
       await ctx.wait(2);
       await ctx.sp('ability', `${NAME} ${S} ground_destruction force`);
       await ctx.wait(8);
