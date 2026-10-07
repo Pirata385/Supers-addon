@@ -312,9 +312,11 @@ async function suite(ctx, p) {
     r = await ctx.sp('ability', `${NAME} ${S} blitz force`);
     await ctx.wait(2);
     s = await st();
-    const z = p.location.z - ctx.origin.z;
-    ctx.log(`blitz into wall: stopped at dz ${z.toFixed(2)} (wall at -37), ${JSON.stringify(s.lastBlitz)}`);
-    ctx.assert(r.fired === true && z < -37.2 && z > -40, 'blitz stops right before a stone wall', { z, last: s.lastBlitz });
+    // the wall's near face is the block boundary floor(origin.z - 37); the hitbox is 0.3 wide each side
+    const face = Math.floor(ctx.origin.z - 37);
+    const front = p.location.z + 0.3;
+    ctx.log(`blitz into wall: front edge at ${front.toFixed(2)}, wall face at ${face}, ${JSON.stringify(s.lastBlitz)}`);
+    ctx.assert(r.fired === true && front <= face + 0.02 && front > face - 2.5, 'blitz stops right before a stone wall without entering it', { front, face, last: s.lastBlitz });
     ctx.assert(s.lastBlitz?.blocked === true, 'blitz reports the wall', s.lastBlitz);
     ctx.fill([-33, 0, -37], [-27, 3, -37], 'air');
   }

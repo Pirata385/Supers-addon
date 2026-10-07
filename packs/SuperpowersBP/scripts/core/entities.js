@@ -240,6 +240,7 @@ export function creatureInSight(source, range, radiusPadding = 1.2) {
  * @property {Set<string>} hit
  * @property {(t: Thrown, at: import('./math.js').Vec3, speed: number) => void} [onImpact]
  * @property {boolean} breaksBlocks
+ * @property {boolean} [wasAirborne]
  */
 /** @type {Map<string, Thrown>} */
 const thrown = new Map();
@@ -255,7 +256,7 @@ export function trackThrown(entity, thrower, opts = {}) {
     thrower,
     damagePerSpeed: opts.damagePerSpeed ?? 6,
     until: system.currentTick + (opts.ticks ?? 80),
-    lastSpeed: opts.initialSpeed ?? 2,
+    lastSpeed: opts.initialSpeed ?? 0, // peak speed is measured during the grace window
     grace: system.currentTick + 3,
     hit: new Set(thrower ? [thrower.id, entity.id] : [entity.id]),
     onImpact: opts.onImpact,
@@ -327,16 +328,31 @@ export function tickThrown(tick) {
       }
       if (!thrown.has(id)) continue;
     }
+    // During the launch grace period only remember the peak speed: velocity reads right
+    // after a launch can still be stale, but a wall hit inside the grace window must count.
+    if (tick < t.grace) {
+      t.lastSpeed = Math.max(t.lastSpeed, speed);
+      t.wasAirborne = t.wasAirborne || !e.isOnGround;
+      continue;
+    }
     // Sudden deceleration = slammed into terrain.
-    if (tick >= t.grace && t.lastSpeed > 0.9 && speed < t.lastSpeed * 0.45) {
+    if (t.lastSpeed > 0.9 && speed < t.lastSpeed * 0.45) {
       impact(t, center, t.lastSpeed);
       thrown.delete(id);
       continue;
     }
-    if (tick >= t.grace && speed < 0.15 && e.isOnGround) {
+    // Crashing into the ground at speed (ground friction alone does not trip the ratio above).
+    const onGround = e.isOnGround;
+    if (onGround && t.wasAirborne && t.lastSpeed > 1.1) {
+      impact(t, center, t.lastSpeed * 0.7);
       thrown.delete(id);
       continue;
     }
+    if (speed < 0.15 && onGround) {
+      thrown.delete(id);
+      continue;
+    }
+    t.wasAirborne = !onGround;
     t.lastSpeed = speed;
   }
 }

@@ -8,7 +8,7 @@ docs/ARCHITECTURE.md "Particles" table (format_version 1.10.0).
     python3 tools/gen_particles.py              # write atlas + every particle JSON
     python3 tools/gen_particles.py --check      # validate the files on disk (no writing)
     python3 tools/gen_particles.py --preview D  # also write an 4x upscaled atlas preview to D
-    python3 tools/gen_particles.py --long-axis x  # if lookat_direction turns out to align the X axis
+    python3 tools/gen_particles.py --long-axis y  # alternative axis (default x matches Bedrock/Wintersky)
 
 ``--check`` validates every particle file: JSON, identifier/contract match, materials, facing
 modes, that every Molang expression parses (a small Molang evaluator is included), that every
@@ -63,7 +63,7 @@ TEX = 'textures/sp/particles'
 TEX_PATH = os.path.join(RP, TEX + '.png')
 TW = TH = 256
 
-LOOKAT_DIRECTION_LONG_AXIS = 'y'
+LOOKAT_DIRECTION_LONG_AXIS = 'x'  # verified against Wintersky (Blockbench's Bedrock particle engine): setFromUnitVectors(X, direction)
 
 # ====================================================================== contract
 # id -> (inputs, file name). Inputs exactly as in docs/ARCHITECTURE.md.

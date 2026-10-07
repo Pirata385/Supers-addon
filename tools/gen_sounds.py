@@ -1766,8 +1766,14 @@ def contract_ids():
 
 
 def script_sound_ids():
-    """{sound id: [file:line, ...]} for ids passed to fx.sound / fx.soundTo / playSound."""
+    """Sound ids referenced by the scripts.
+
+    Returns (used, indirect, dynamic): `used` = {id: [file:line]} for literals passed directly to
+    fx.sound / fx.soundTo / playSound; `indirect` = other 'sp.x.y' string literals (ids routed
+    through a variable/table - possibly not sounds at all); `dynamic` = template-literal ids.
+    """
     used = {}
+    indirect = {}
     dynamic = []
     call = re.compile(r'\b(?:sound|soundTo|playSound)\s*\(')
     lit = re.compile(r"""['"`]((?:sp|random|mob|block|ambient|dig|step|note|fire|damage|game|use|armor|bucket|liquid|item|beacon|conduit|portal|ui)\.[A-Za-z0-9_.]+)['"`]""")
@@ -1795,8 +1801,8 @@ def script_sound_ids():
                     dynamic.append(f'{rel}:{line}')
             # any other 'sp.x.y' string literal (e.g. passed through a variable)
             for mm in re.finditer(r"""['"](sp\.[a-z0-9_]+(?:\.[a-z0-9_]+)*)['"]""", src):
-                used.setdefault(mm.group(1), []).append(f'{rel}:{src.count(chr(10), 0, mm.start()) + 1}')
-    return used, dynamic
+                indirect.setdefault(mm.group(1), []).append(f'{rel}:{src.count(chr(10), 0, mm.start()) + 1}')
+    return used, {k: v for k, v in indirect.items() if k not in used}, dynamic
 
 
 def check():
@@ -1865,15 +1871,19 @@ def check():
     else:
         errors.append('sounds.json missing')
     # scripts
-    used, dynamic = script_sound_ids()
+    used, indirect, dynamic = script_sound_ids()
     undefined = []
     for sid, where in sorted(used.items()):
         if sid.startswith('sp.') and sid not in defs:
             undefined.append(sid)
             errors.append(f'script uses undefined sound {sid} ({", ".join(where[:3])})')
+    for sid, where in sorted(indirect.items()):
+        if sid not in defs:
+            warns.append(f'string {sid} is not a defined sound id - fine unless it is played '
+                         f'through a variable ({", ".join(where[:3])})')
     for w in dynamic:
         warns.append(f'dynamic sound id (template literal) at {w}: verify manually')
-    sp_used = sorted(s for s in used if s.startswith('sp.'))
+    sp_used = sorted(set(s for s in used if s.startswith('sp.')) | set(s for s in indirect if s in defs))
     vanilla = sorted(s for s in used if not s.startswith('sp.'))
     for w in warns:
         print('WARN ', w)

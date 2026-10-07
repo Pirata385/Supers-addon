@@ -80,6 +80,7 @@ const BLITZ_STEP = 0.5;
 const BLITZ_MAX_DY = 0.35;
 const BLITZ_HIT_RADIUS = 1.6;
 const BLITZ_BODY = [0.1, 0.9, 1.7]; // heights checked along the path (feet, waist, head)
+const BLITZ_CORNERS = [-0.29, 0.29]; // player hitbox half-width (0.3) minus a hair: flush walls stay free
 const BLITZ_MAX_STEP_UPS = 6;
 const BLITZ_MIN_TRAVEL = 1;
 const BLITZ_NOFALL = 40;
@@ -850,18 +851,38 @@ function blitzDirection(p) {
   return { dir: V.norm({ x: h.x, y: dy, z: h.z }), ground: onGround && dy === 0 };
 }
 
-/** Whether the body fits at `q` (feet position); fragile blocks in the way are broken when allowed. */
-function bodyFits(dim, q, grief, counter) {
+/**
+ * Whether the player's whole hitbox fits with its feet at `q`. Checks the four footprint corners
+ * (every block cell the footprint overlaps contains one) at feet, waist and head height.
+ * Fragile blocks count as free when griefing is allowed; they are collected in `toBreak` and only
+ * broken once the dash really passes through them.
+ * @param {Map<string, any>} cache block lookups shared across the whole dash
+ * @param {Map<string, any>} toBreak
+ */
+function bodyFits(dim, q, grief, cache, toBreak) {
+  const found = [];
   for (const h of BLITZ_BODY) {
-    const b = getBlockSafe(dim, { x: q.x, y: q.y + h, z: q.z });
-    if (!b) return false;
-    if (isPassable(b)) continue;
-    if (grief && tierOf(b) === 1 && breakBlock(b, { maxTier: 1, effects: true })) {
-      counter.broken++;
-      continue;
+    const y = Math.floor(q.y + h);
+    for (const cx of BLITZ_CORNERS) {
+      for (const cz of BLITZ_CORNERS) {
+        const x = Math.floor(q.x + cx), z = Math.floor(q.z + cz);
+        const k = `${x},${y},${z}`;
+        let b = cache.get(k);
+        if (b === undefined) {
+          b = getBlockSafe(dim, { x, y, z }) ?? null;
+          cache.set(k, b);
+        }
+        if (!b) return false; // unloaded / outside the world
+        if (isPassable(b)) continue;
+        if (grief && tierOf(b) === 1) {
+          found.push([k, b]);
+          continue;
+        }
+        return false;
+      }
     }
-    return false;
   }
+  for (const [k, b] of found) toBreak.set(k, b);
   return true;
 }
 
@@ -870,20 +891,21 @@ function blitz(p, d, tick) {
   const start = p.location;
   const { dir, ground } = blitzDirection(p);
   const grief = griefingAllowed();
-  const counter = { broken: 0 };
+  const cache = new Map();
+  const toBreak = new Map();
   let last = { x: start.x, y: start.y, z: start.z };
   let lift = 0;
   let stepUps = 0;
   let blocked = false;
   for (let s = BLITZ_STEP; s <= T.blitzRange + 1e-6; s += BLITZ_STEP) {
     const q = { x: start.x + dir.x * s, y: start.y + dir.y * s + lift, z: start.z + dir.z * s };
-    if (bodyFits(dim, q, grief, counter)) {
+    if (bodyFits(dim, q, grief, cache, toBreak)) {
       last = q;
       continue;
     }
     // running along the ground: hop up single steps
     const up = { x: q.x, y: Math.floor(q.y + 0.1) + 1, z: q.z };
-    if (ground && stepUps < BLITZ_MAX_STEP_UPS && up.y - q.y <= 1.05 && bodyFits(dim, up, grief, counter)) {
+    if (ground && stepUps < BLITZ_MAX_STEP_UPS && up.y - q.y <= 1.05 && bodyFits(dim, up, grief, cache, toBreak)) {
       lift += up.y - q.y;
       stepUps++;
       last = up;
@@ -897,6 +919,9 @@ function blitz(p, d, tick) {
     hint(p, '§eBlitz Dash §7- no room to dash that way.');
     return false;
   }
+  // fragile blocks on the travelled path shatter (only those the dash really passed through)
+  const counter = { broken: 0 };
+  for (const b of toBreak.values()) if (breakBlock(b, { maxTier: 1, effects: true })) counter.broken++;
   // creatures along the path
   const a = waist(start);
   const b = waist(last);

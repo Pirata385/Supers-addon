@@ -122,7 +122,7 @@ def main():
                     help="@minecraft/server beta version for the test pack (default: auto from the BDS version, e.g. 2.6.0-beta for 1.26.3)")
     ap.add_argument('--suites', default='', help='comma separated GameTest suites to run (default: all)')
     ap.add_argument('--stub-powers-except', default=None,
-                    help="replace every power module except this id (or 'all') with a stub in the server copy")
+                    help="replace every power module except these comma-separated ids (or 'none') with a stub in the server copy")
     args = ap.parse_args()
 
     work = os.path.abspath(args.work)
@@ -157,7 +157,8 @@ def main():
         pdir = os.path.join(srv, 'behavior_packs', 'sp_bp', 'scripts', 'powers')
         for fn in os.listdir(pdir):
             pid = fn[:-3]
-            if fn.endswith('.js') and pid != args.stub_powers_except:
+            keep = [x.strip() for x in args.stub_powers_except.split(',')]
+            if fn.endswith('.js') and pid not in keep:
                 open(os.path.join(pdir, fn), 'w').write(
                     "import { definePower } from '../core/powers.js';\ndefinePower('%s', {});\n" % pid)
     if args.test_pack:
