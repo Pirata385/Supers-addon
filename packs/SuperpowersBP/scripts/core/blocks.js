@@ -3,6 +3,7 @@ import { BlockPermutation } from '@minecraft/server';
 import { griefingAllowed } from './state.js';
 import { DEBRIS_TEXTURES } from '../config.js';
 import * as fx from './fx.js';
+import { addScaled as addScaledV } from './math.js';
 
 const UNBREAKABLE = new Set([
   'minecraft:bedrock', 'minecraft:barrier', 'minecraft:command_block', 'minecraft:chain_command_block',
@@ -204,3 +205,31 @@ export function debrisTextureFor(id) {
   for (const [hint, tex] of pairs) if (plain.includes(hint)) return DEBRIS_TEXTURES.indexOf(tex);
   return 0;
 }
+
+/**
+ * Exact point where a ray enters the unit cube of a hit block (slab method). The raycast's
+ * faceLocation is not reliable on BDS 1.26.3, so hit points are recomputed from the ray.
+ * @param {import('./math.js').Vec3} origin @param {import('./math.js').Vec3} dir unit direction
+ * @param {{x:number,y:number,z:number}} blockLoc
+ * @returns {import('./math.js').Vec3}
+ */
+export function rayBlockPoint(origin, dir, blockLoc) {
+  let tmin = 0;
+  let tmax = Infinity;
+  for (const k of ['x', 'y', 'z']) {
+    const lo = blockLoc[k];
+    const hi = lo + 1;
+    if (Math.abs(dir[k]) < 1e-9) {
+      if (origin[k] < lo || origin[k] > hi) tmin = Infinity;
+      continue;
+    }
+    let t1 = (lo - origin[k]) / dir[k];
+    let t2 = (hi - origin[k]) / dir[k];
+    if (t1 > t2) [t1, t2] = [t2, t1];
+    tmin = Math.max(tmin, t1);
+    tmax = Math.min(tmax, t2);
+  }
+  if (!Number.isFinite(tmin) || tmin > tmax) return { x: blockLoc.x + 0.5, y: blockLoc.y + 1, z: blockLoc.z + 0.5 };
+  return addScaledV(origin, dir, tmin);
+}
+

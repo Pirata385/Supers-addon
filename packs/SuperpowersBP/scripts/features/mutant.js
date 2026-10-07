@@ -8,7 +8,7 @@ import { onTick } from '../core/loop.js';
 import * as V from '../core/math.js';
 import * as fx from '../core/fx.js';
 import { setVelocity, damage, eyes, isValid, isVulnerablePlayer, knockFrom, creaturesNear } from '../core/entities.js';
-import { breakBlock, getBlockSafe } from '../core/blocks.js';
+import { breakBlock, getBlockSafe, rayBlockPoint } from '../core/blocks.js';
 
 const VARIANT_POWER = ['strength', 'heat_vision', 'speedster', 'esper'];
 
@@ -171,7 +171,7 @@ function runAction(m, tick) {
       let end = to;
       try {
         const hit = dim.getBlockFromRay(from, dir, { maxDistance: V.dist(from, to), includePassableBlocks: false });
-        if (hit) end = V.add(hit.block.location, hit.faceLocation);
+        if (hit) end = rayBlockPoint(from, dir, hit.block.location);
       } catch {
         /* ignore */
       }

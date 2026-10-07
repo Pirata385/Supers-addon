@@ -1,0 +1,46 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.sp.debris": {
+      "arrays": {
+        "textures": {
+          "Array.skins": [
+            "Texture.stone", "Texture.dirt", "Texture.grass", "Texture.cobblestone",
+            "Texture.sand", "Texture.gravel", "Texture.deepslate", "Texture.oak_log",
+            "Texture.oak_planks", "Texture.leaves", "Texture.netherrack", "Texture.end_stone",
+            "Texture.snow", "Texture.ice", "Texture.obsidian", "Texture.sandstone",
+            "Texture.stone_bricks", "Texture.clay", "Texture.mud", "Texture.blackstone",
+            "Texture.basalt", "Texture.tuff", "Texture.red_sand", "Texture.terracotta",
+            "Texture.glass", "Texture.iron_block", "Texture.magma", "Texture.meteorite"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [{ "*": "Material.default" }],
+      "textures": ["Array.skins[query.property('sp:tex')]"]
+    },
+    "controller.render.sp.meteor": {
+      "geometry": "Geometry.default",
+      "materials": [{ "*": "Material.default" }],
+      "textures": ["Texture.default"]
+    },
+    "controller.render.sp.rogue_mutant": {
+      "arrays": {
+        "textures": {
+          "Array.skins": ["Texture.strength", "Texture.heat_vision", "Texture.speedster", "Texture.esper"]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        { "*": "Material.default" },
+        { "hat": "Material.overlay" },
+        { "jacket": "Material.overlay" },
+        { "rightSleeve": "Material.overlay" },
+        { "leftSleeve": "Material.overlay" },
+        { "rightPants": "Material.overlay" },
+        { "leftPants": "Material.overlay" }
+      ],
+      "textures": ["Array.skins[query.variant]"]
+    }
+  }
+}

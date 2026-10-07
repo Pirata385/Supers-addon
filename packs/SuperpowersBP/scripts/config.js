@@ -143,7 +143,7 @@ export const TUNING = {
     punchLift: 0.55,
     jumpChargeTicks: 40,
     jumpMinVertical: 1.2,
-    jumpMaxVertical: 3.6,
+    jumpMaxVertical: 2.85, // measured: 36.5-block apex on BDS 1.26.3
     jumpForward: 1.6,
     sneakChargeDelay: 12,
     landingRadius: 5,

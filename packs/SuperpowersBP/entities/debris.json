@@ -1,0 +1,79 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "sp:debris",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "properties": {
+        "sp:tex": {
+          "type": "int",
+          "range": [0, 31],
+          "default": 0,
+          "client_sync": true
+        },
+        "sp:size": {
+          "type": "float",
+          "range": [0.25, 4.0],
+          "default": 1.0,
+          "client_sync": true
+        }
+      }
+    },
+    "component_groups": {
+      "sp:despawn": {
+        "minecraft:instant_despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": ["sp_debris", "inanimate"]
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 0.9
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      },
+      "minecraft:knockback_resistance": {
+        "value": 1.0
+      },
+      "minecraft:fire_immune": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:timer": {
+        "looping": false,
+        "time": 120,
+        "randomInterval": false,
+        "time_down_event": {
+          "event": "sp:despawn",
+          "target": "self"
+        }
+      }
+    },
+    "events": {
+      "sp:despawn": {
+        "add": {
+          "component_groups": ["sp:despawn"]
+        }
+      }
+    }
+  }
+}

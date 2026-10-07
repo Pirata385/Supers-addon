@@ -1,0 +1,1012 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "sp.power.gain": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/power/gain",
+          "volume": 0.72,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.power.lose": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/power/lose",
+          "volume": 0.52,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.power.purge": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/power/purge",
+          "volume": 0.98,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.syringe.inject": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/syringe/inject",
+          "volume": 0.74,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.ui.open": {
+      "category": "ui",
+      "sounds": [
+        {
+          "name": "sounds/sp/ui/open",
+          "volume": 0.41,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.ui.click": {
+      "category": "ui",
+      "sounds": [
+        {
+          "name": "sounds/sp/ui/click1",
+          "volume": 0.37,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/ui/click2",
+          "volume": 0.34,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.ui.select": {
+      "category": "ui",
+      "sounds": [
+        {
+          "name": "sounds/sp/ui/select",
+          "volume": 0.25,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.ui.deny": {
+      "category": "ui",
+      "sounds": [
+        {
+          "name": "sounds/sp/ui/deny",
+          "volume": 0.34,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.impact.heavy": {
+      "category": "player",
+      "min_distance": 8.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/impact/heavy1",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/impact/heavy2",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/impact/heavy3",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.impact.light": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/impact/light1",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/impact/light2",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/impact/light3",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.debris.rip": {
+      "category": "player",
+      "min_distance": 6.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/debris/rip1",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/debris/rip2",
+          "volume": 0.91,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.debris.place": {
+      "category": "block",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/debris/place1",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/debris/place2",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.whoosh": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/misc/whoosh1",
+          "volume": 0.65,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/misc/whoosh2",
+          "volume": 0.5,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.punch": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/punch1",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/strength/punch2",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/strength/punch3",
+          "volume": 0.97,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.charge": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/charge",
+          "volume": 0.73,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.leap": {
+      "category": "player",
+      "min_distance": 6.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/leap1",
+          "volume": 0.76,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/strength/leap2",
+          "volume": 0.78,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.land": {
+      "category": "player",
+      "min_distance": 12.0,
+      "max_distance": 96.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/land1",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/strength/land2",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.throw": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/throw1",
+          "volume": 0.83,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/strength/throw2",
+          "volume": 0.67,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.dash": {
+      "category": "player",
+      "min_distance": 8.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/dash",
+          "volume": 0.6,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.strength.clap": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 128.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/strength/clap",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.takeoff": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/takeoff",
+          "volume": 0.64,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.land": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/land",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.wind": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/wind1",
+          "volume": 0.49,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/flight/wind2",
+          "volume": 0.36,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/flight/wind3",
+          "volume": 0.36,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.boom": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 128.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/boom1",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/flight/boom2",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.grab": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/grab",
+          "volume": 0.9,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.flight.throw": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/flight/throw",
+          "volume": 0.75,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.start": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/start",
+          "volume": 0.58,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.loop": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/loop1",
+          "volume": 0.62,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/heat/loop2",
+          "volume": 0.49,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.stop": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/stop",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.sizzle": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/sizzle1",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/heat/sizzle2",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/heat/sizzle3",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.burst": {
+      "category": "player",
+      "min_distance": 8.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/burst1",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/heat/burst2",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.overheat": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/overheat",
+          "volume": 0.54,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.heat.focus": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 16.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/heat/focus",
+          "volume": 0.25,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.start": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/start",
+          "volume": 0.63,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.stop": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/stop",
+          "volume": 0.39,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.zap": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/zap1",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/speed/zap2",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/speed/zap3",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.boom": {
+      "category": "player",
+      "min_distance": 12.0,
+      "max_distance": 96.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/boom",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.gear": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/gear",
+          "volume": 0.7,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.dodge": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/dodge1",
+          "volume": 0.59,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/speed/dodge2",
+          "volume": 0.63,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.slow_in": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/slow_in",
+          "volume": 0.78,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.slow_out": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/slow_out",
+          "volume": 0.64,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.speed.blitz": {
+      "category": "player",
+      "min_distance": 12.0,
+      "max_distance": 96.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/speed/blitz",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.grab": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/grab",
+          "volume": 0.52,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.hold": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/hold1",
+          "volume": 0.4,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/esper/hold2",
+          "volume": 0.46,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.launch": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/launch",
+          "volume": 0.62,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.drop": {
+      "category": "player",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/drop",
+          "volume": 0.8,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.levitate": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/levitate",
+          "volume": 0.43,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.slam": {
+      "category": "player",
+      "min_distance": 8.0,
+      "max_distance": 64.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/slam",
+          "volume": 0.85,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.barrier_up": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/barrier_up",
+          "volume": 0.6,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.barrier_down": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/barrier_down",
+          "volume": 0.65,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.reflect": {
+      "category": "player",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/reflect1",
+          "volume": 0.4,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/esper/reflect2",
+          "volume": 0.44,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.meteor_call": {
+      "category": "weather",
+      "min_distance": 16.0,
+      "max_distance": 96.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/meteor_call",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.meteor_fall": {
+      "category": "player",
+      "min_distance": 16.0,
+      "max_distance": 128.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/meteor_fall",
+          "volume": 0.72,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.esper.meteor_impact": {
+      "category": "player",
+      "min_distance": 24.0,
+      "max_distance": 128.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/esper/meteor_impact",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.mutant.ambient": {
+      "category": "hostile",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/mutant/ambient1",
+          "volume": 0.71,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/mutant/ambient2",
+          "volume": 0.69,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/mutant/ambient3",
+          "volume": 0.73,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.mutant.hurt": {
+      "category": "hostile",
+      "min_distance": 2.0,
+      "max_distance": 24.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/mutant/hurt1",
+          "volume": 0.49,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/mutant/hurt2",
+          "volume": 0.51,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        },
+        {
+          "name": "sounds/sp/mutant/hurt3",
+          "volume": 0.6,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.mutant.death": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 32.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/mutant/death",
+          "volume": 0.62,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    },
+    "sp.mutant.power": {
+      "category": "hostile",
+      "min_distance": 4.0,
+      "max_distance": 48.0,
+      "sounds": [
+        {
+          "name": "sounds/sp/mutant/power",
+          "volume": 1.0,
+          "pitch": 1.0,
+          "load_on_low_memory": true,
+          "stream": false
+        }
+      ]
+    }
+  }
+}

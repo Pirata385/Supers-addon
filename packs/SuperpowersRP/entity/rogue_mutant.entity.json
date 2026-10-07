@@ -1,0 +1,50 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "sp:rogue_mutant",
+      "materials": {
+        "default": "entity_emissive_alpha",
+        "overlay": "entity_alphatest"
+      },
+      "textures": {
+        "strength": "textures/entity/rogue_mutant_0",
+        "heat_vision": "textures/entity/rogue_mutant_1",
+        "speedster": "textures/entity/rogue_mutant_2",
+        "esper": "textures/entity/rogue_mutant_3"
+      },
+      "geometry": {
+        "default": "geometry.sp.rogue_mutant"
+      },
+      "spawn_egg": {
+        "base_color": "#1d3a1e",
+        "overlay_color": "#8a3fd1"
+      },
+      "scripts": {
+        "pre_animation": [
+          "variable.tcos0 = math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed * 57.3;"
+        ],
+        "animate": [
+          "base_pose",
+          "look_at_target",
+          "move",
+          "bob",
+          "hunch",
+          "attack_controller"
+        ]
+      },
+      "animations": {
+        "base_pose": "animation.humanoid.base_pose",
+        "look_at_target": "animation.humanoid.look_at_target.default",
+        "move": "animation.humanoid.move",
+        "bob": "animation.humanoid.bob",
+        "attack_rotations": "animation.humanoid.attack.rotations",
+        "hunch": "animation.sp.mutant.hunch",
+        "cast": "animation.sp.mutant.cast",
+        "attack_controller": "controller.animation.sp.mutant.attack"
+      },
+      "render_controllers": ["controller.render.sp.rogue_mutant"],
+      "enable_attachables": false
+    }
+  }
+}

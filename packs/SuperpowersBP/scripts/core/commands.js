@@ -8,8 +8,8 @@ import {
   ItemStack,
   Player,
 } from '@minecraft/server';
-import { POWER_IDS, POWERS, ITEMS } from '../config.js';
-import { rt } from './state.js';
+import { POWER_IDS, POWERS, ITEMS, DEFAULT_WORLD_SETTINGS } from '../config.js';
+import { rt, worldSettings, setWorldSetting } from './state.js';
 import { grantPower, revokePower, revokeAll, tryActivate, beginHold, endHold, handlersOf, updateImmunity } from './powers.js';
 import { handleButton, onEmblemUse } from './input.js';
 
@@ -135,6 +135,18 @@ export function registerDebugEvents() {
     (ev) => {
       const args = ev.message.trim().split(/\s+/);
       const cmd = ev.id.slice(3);
+      if (cmd === 'world') {
+        // scriptevent sp:world <key> <json value>
+        let value;
+        try {
+          value = JSON.parse(args[1]);
+        } catch {
+          value = args[1];
+        }
+        if (args[0] in DEFAULT_WORLD_SETTINGS) setWorldSetting(args[0], value);
+        reply('world', { settings: worldSettings() });
+        return;
+      }
       const player = findPlayer(args[0]);
       if (!player) {
         reply('error', { cmd, msg: `no player ${args[0]}` });

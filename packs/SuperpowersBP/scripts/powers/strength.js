@@ -12,7 +12,7 @@ import {
   isValid, isProjectile, eyes,
 } from '../core/entities.js';
 import { withOwner } from '../core/context.js';
-import { getBlockSafe, tierOf, breakBlock, breakSphere, blockColor, transformBlock, isPassable } from '../core/blocks.js';
+import { getBlockSafe, tierOf, breakBlock, breakSphere, blockColor, transformBlock, isPassable, rayBlockPoint } from '../core/blocks.js';
 import { spawnDebris, holdDebris, throwDebris, removeDebris } from '../features/debris.js';
 import { bar } from '../core/hud.js';
 import { buttonDown } from '../core/input.js';
@@ -466,7 +466,7 @@ function aimPoint(p) {
   }
   try {
     const hit = p.getBlockFromViewDirection({ maxDistance: BOULDER_AIM_RANGE, includeLiquidBlocks: true, includePassableBlocks: false });
-    if (hit) return V.add(hit.block.location, hit.faceLocation);
+    if (hit) return rayBlockPoint(eye, look, hit.block.location);
   } catch {
     /* ignore */
   }

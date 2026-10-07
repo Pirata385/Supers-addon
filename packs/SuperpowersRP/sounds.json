@@ -1,0 +1,23 @@
+{
+  "entity_sounds": {
+    "entities": {
+      "sp:rogue_mutant": {
+        "volume": 1.0,
+        "pitch": [
+          0.85,
+          1.05
+        ],
+        "events": {
+          "ambient": "sp.mutant.ambient",
+          "hurt": "sp.mutant.hurt",
+          "death": "sp.mutant.death",
+          "step": {
+            "sound": "mob.zombie.step",
+            "volume": 0.3,
+            "pitch": 0.8
+          }
+        }
+      }
+    }
+  }
+}
