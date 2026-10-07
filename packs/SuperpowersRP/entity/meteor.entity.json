@@ -1,0 +1,25 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "sp:meteor",
+      "materials": {
+        "default": "entity_emissive_alpha"
+      },
+      "textures": {
+        "default": "textures/entity/meteor"
+      },
+      "geometry": {
+        "default": "geometry.sp.meteor"
+      },
+      "scripts": {
+        "scale": "query.property('sp:size')",
+        "animate": ["spin"]
+      },
+      "animations": {
+        "spin": "animation.sp.meteor.spin"
+      },
+      "render_controllers": ["controller.render.sp.meteor"]
+    }
+  }
+}

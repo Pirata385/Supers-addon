@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.sp.debris.tumble": {
+      "initial_state": "resting",
+      "states": {
+        "resting": {
+          "transitions": [
+            { "tumbling": "!query.is_on_ground && (query.ground_speed + math.abs(query.vertical_speed)) > 6.0" }
+          ],
+          "blend_transition": 0.2
+        },
+        "tumbling": {
+          "animations": ["tumble"],
+          "transitions": [
+            { "resting": "query.is_on_ground || (query.ground_speed + math.abs(query.vertical_speed)) < 3.0" }
+          ],
+          "blend_transition": 0.25
+        }
+      }
+    },
+    "controller.animation.sp.mutant.attack": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [{ "attacking": "variable.attack_time > 0.0" }]
+        },
+        "attacking": {
+          "animations": ["attack_rotations"],
+          "transitions": [{ "default": "variable.attack_time <= 0.0" }],
+          "blend_transition": 0.1
+        }
+      }
+    }
+  }
+}

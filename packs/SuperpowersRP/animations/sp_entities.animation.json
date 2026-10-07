@@ -1,0 +1,77 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.sp.debris.tumble": {
+      "loop": true,
+      "bones": {
+        "block": {
+          "rotation": ["query.life_time * 420.0", "query.life_time * 260.0", "query.life_time * 170.0"]
+        }
+      }
+    },
+    "animation.sp.meteor.spin": {
+      "loop": true,
+      "bones": {
+        "rock": {
+          "rotation": ["query.life_time * 210.0", "query.life_time * 150.0", "query.life_time * 95.0"]
+        }
+      }
+    },
+    "animation.sp.mutant.hunch": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": [8.0, 0.0, 0.0]
+        },
+        "head": {
+          "position": [0.0, -0.5, -1.0],
+          "rotation": [0.0, 0.0, "math.sin(query.life_time * 40.0) * 4.0"]
+        },
+        "rightArm": {
+          "rotation": ["-10.0 + (math.sin(query.life_time * 37.0) > 0.93 ? math.sin(query.life_time * 1400.0) * 6.0 : 0.0)", 0.0, 5.0]
+        },
+        "leftArm": {
+          "rotation": [-6.0, 0.0, -5.0]
+        }
+      }
+    },
+    "animation.sp.mutant.cast": {
+      "loop": false,
+      "animation_length": 0.8,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": [-14.0, 0.0, 0.0],
+            "0.6": [-14.0, 0.0, 0.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        },
+        "body": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": [-6.0, 0.0, 0.0],
+            "0.6": [-6.0, 0.0, 0.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": [-165.0, 0.0, -14.0],
+            "0.6": [-160.0, 0.0, -14.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": [-165.0, 0.0, 14.0],
+            "0.6": [-160.0, 0.0, 14.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    }
+  }
+}

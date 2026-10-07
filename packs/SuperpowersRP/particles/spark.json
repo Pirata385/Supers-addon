@@ -1,0 +1,80 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "sp:spark",
+      "basic_render_parameters": {
+        "material": "particles_add",
+        "texture": "textures/sp/particles"
+      }
+    },
+    "components": {
+      "minecraft:emitter_initialization": {
+        "creation_expression": "variable.hc = (variable.color.r + variable.color.g + variable.color.b) > 0.004;variable.tr = variable.hc ? variable.color.r : 1;variable.tg = variable.hc ? variable.color.g : 0.7;variable.tb = variable.hc ? variable.color.b : 0.3;"
+      },
+      "minecraft:particle_initialization": {
+        "per_render_expression": "variable.t = math.clamp(variable.particle_age / math.max(variable.particle_lifetime, 0.001), 0, 1);"
+      },
+      "minecraft:emitter_rate_instant": {
+        "num_particles": 10
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 0.05
+      },
+      "minecraft:emitter_shape_sphere": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "radius": 0.05,
+        "surface_only": false,
+        "direction": "outwards"
+      },
+      "minecraft:particle_initial_speed": "math.random(3, 7)",
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": "math.random(0.4, 0.7)"
+      },
+      "minecraft:particle_motion_dynamic": {
+        "linear_acceleration": [
+          0,
+          -14,
+          0
+        ],
+        "linear_drag_coefficient": 2
+      },
+      "minecraft:particle_motion_collision": {
+        "collision_radius": 0.04,
+        "coefficient_of_restitution": 0.4,
+        "collision_drag": 3
+      },
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.07 * (1 - variable.t * 0.6)",
+          "0.07 * (1 - variable.t * 0.6)"
+        ],
+        "facing_camera_mode": "lookat_xyz",
+        "uv": {
+          "texture_width": 256,
+          "texture_height": 256,
+          "uv": [
+            32,
+            0
+          ],
+          "uv_size": [
+            16,
+            16
+          ]
+        }
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          "(1 + (variable.tr - 1) * math.min(variable.t * 2.5, 1)) * (1 - variable.t * variable.t)",
+          "(1 + (variable.tg - 1) * math.min(variable.t * 2.5, 1)) * (1 - variable.t * variable.t)",
+          "(1 + (variable.tb - 1) * math.min(variable.t * 2.5, 1)) * (1 - variable.t * variable.t)",
+          "(1 - variable.t * variable.t)"
+        ]
+      }
+    }
+  }
+}

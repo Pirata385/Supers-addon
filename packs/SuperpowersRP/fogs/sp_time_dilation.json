@@ -1,0 +1,28 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:fog_settings": {
+    "description": {
+      "identifier": "sp:time_dilation"
+    },
+    "distance": {
+      "air": {
+        "fog_start": 6,
+        "fog_end": 72,
+        "fog_color": "#7cc8ff",
+        "render_distance_type": "fixed"
+      },
+      "weather": {
+        "fog_start": 4,
+        "fog_end": 56,
+        "fog_color": "#6fb4e8",
+        "render_distance_type": "fixed"
+      },
+      "water": {
+        "fog_start": 2,
+        "fog_end": 32,
+        "fog_color": "#2f8fd0",
+        "render_distance_type": "fixed"
+      }
+    }
+  }
+}

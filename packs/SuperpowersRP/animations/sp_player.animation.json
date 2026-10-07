@@ -1,0 +1,480 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.sp.reset": {
+      "loop": false,
+      "animation_length": 0.05,
+      "bones": {
+        "root": {
+          "rotation": [0.0, 0.0, 0.0]
+        }
+      }
+    },
+    "animation.sp.flight.hover": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "position": [0.0, "(math.sin(query.life_time * 110.0) * 0.6) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(math.sin(query.life_time * 95.0) * 3.0 - this * 0.6) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "(14.0 + math.sin(query.life_time * 110.0) * 3.0) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(math.sin(query.life_time * 95.0 + 60.0) * 3.0 - this * 0.6) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "(-14.0 - math.sin(query.life_time * 110.0) * 3.0) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": ["(10.0 + math.sin(query.life_time * 80.0) * 5.0 - this * 0.8) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "3.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftLeg": {
+          "rotation": ["(4.0 + math.sin(query.life_time * 80.0 + 90.0) * 5.0 - this * 0.8) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-3.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.flight.cruise": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": ["(90.0 + query.target_x_rotation - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(math.sin(query.target_x_rotation) * 14.0 + 10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(math.cos(query.target_x_rotation) * 16.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightArm": {
+          "rotation": ["(-172.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(6.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(6.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-4.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": ["(2.0 + math.sin(query.life_time * 900.0) * 1.2 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-1.5 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftLeg": {
+          "rotation": ["(2.0 + math.sin(query.life_time * 900.0 + 120.0) * 1.2 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(1.5 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.flight.carry": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "position": [0.0, "(math.sin(query.life_time * 110.0) * 0.5) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0]
+        },
+        "body": {
+          "rotation": ["8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(-78.0 - this * 0.8) * (1.0 - (variable.is_first_person ?? 0.0))", "-14.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0]
+        },
+        "leftArm": {
+          "rotation": ["(-78.0 - this * 0.8) * (1.0 - (variable.is_first_person ?? 0.0))", "14.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0]
+        },
+        "rightLeg": {
+          "rotation": ["(12.0 + math.sin(query.life_time * 80.0) * 4.0 - this * 0.7) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "2.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftLeg": {
+          "rotation": ["(6.0 + math.sin(query.life_time * 80.0 + 90.0) * 4.0 - this * 0.7) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-2.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.strength.charge": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": ["(30.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(1.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(9.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "body": {
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "head": {
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightArm": {
+          "rotation": ["(45.0 + math.sin(query.life_time * 2000.0) * 1.2 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(14.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(45.0 + math.sin(query.life_time * 2000.0 + 90.0) * 1.2 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-14.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": ["(-30.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(6.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftLeg": {
+          "rotation": ["(-30.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-6.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.strength.lift": {
+      "loop": true,
+      "bones": {
+        "body": {
+          "rotation": ["-4.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(-168.0 + math.sin(query.life_time * 1500.0) * 0.8 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(-168.0 + math.sin(query.life_time * 1500.0 + 90.0) * 0.8 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": [0.0, 0.0, "3.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftLeg": {
+          "rotation": [0.0, 0.0, "-3.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.strength.dash": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": ["(24.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(5.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "body": {
+          "rotation": [0.0, "30.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(-35.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-12.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(40.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": ["(this * 0.4) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "leftLeg": {
+          "rotation": ["(this * 0.4) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        }
+      }
+    },
+    "animation.sp.heat.beam": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "position": [0.0, 0.0, "-0.8 * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "rotation": ["4.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "body": {
+          "rotation": ["5.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(-140.0 + math.sin(query.life_time * 1300.0) * 1.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(18.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(-this * 0.5) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-6.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.speed.run": {
+      "loop": true,
+      "bones": {
+        "root": {
+          "rotation": ["(30.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+          "position": ["(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(6.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightArm": {
+          "rotation": ["(62.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(62.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-10.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "rightLeg": {
+          "rotation": ["(this * 0.5 - 12.0) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "leftLeg": {
+          "rotation": ["(this * 0.5 - 12.0) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        }
+      }
+    },
+    "animation.sp.esper.channel": {
+      "loop": true,
+      "bones": {
+        "head": {
+          "rotation": ["(math.sin(query.life_time * 2600.0) * 0.6) * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0]
+        },
+        "rightArm": {
+          "rotation": ["(query.target_x_rotation - 88.0 + math.sin(query.life_time * 2400.0) * 1.4 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(query.target_y_rotation * 0.6 - 4.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"]
+        },
+        "leftArm": {
+          "rotation": ["(-18.0 + math.sin(query.life_time * 2000.0) * 0.8) * (1.0 - (variable.is_first_person ?? 0.0))", "8.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-10.0 * (1.0 - (variable.is_first_person ?? 0.0))"]
+        }
+      }
+    },
+    "animation.sp.strength.leap": {
+      "loop": false,
+      "animation_length": 0.6,
+      "bones": {
+        "root": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["-6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["-172.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "4.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["-160.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "4.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["30.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-16.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["20.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-12.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "2.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["14.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-2.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.strength.throw": {
+      "loop": false,
+      "animation_length": 0.6,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0.0": ["-6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.1": ["-10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.24": ["18.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": ["10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": ["(-165.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(8.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.1": ["(-195.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(8.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.24": ["(-50.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["(-40.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": ["(-165.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-8.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.1": ["(-195.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-8.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.24": ["(-50.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["(-40.0 - this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))", "(-this) * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.24": ["-18.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.24": ["10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.strength.clap": {
+      "loop": false,
+      "animation_length": 0.5,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["-6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.2": ["10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.5": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["-85.0 * (1.0 - (variable.is_first_person ?? 0.0))", "65.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.2": ["-92.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-14.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.32": ["-90.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.5": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.1": ["-85.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-65.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.2": ["-92.0 * (1.0 - (variable.is_first_person ?? 0.0))", "14.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.32": ["-90.0 * (1.0 - (variable.is_first_person ?? 0.0))", "12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.5": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.speed.blitz": {
+      "loop": false,
+      "animation_length": 0.4,
+      "bones": {
+        "root": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.06": ["38.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.25": ["22.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.06": ["-100.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.25": ["-85.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.06": ["65.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-12.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.25": ["45.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-8.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.06": ["24.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.25": ["12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftLeg": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.06": ["-30.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.25": ["-15.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.esper.cast": {
+      "loop": false,
+      "animation_length": 0.6,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": ["6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "body": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.4": ["10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-168.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "6.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.28": ["-172.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "6.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["-92.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-168.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-6.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.28": ["-172.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-6.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.4": ["-92.0 * (1.0 - (variable.is_first_person ?? 0.0))", "8.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.esper.barrier": {
+      "loop": false,
+      "animation_length": 0.6,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.12": ["6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.36": ["-6.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.12": ["-70.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-42.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.26": ["-72.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-46.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.36": ["-12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "80.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.48": ["-10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "76.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.12": ["-70.0 * (1.0 - (variable.is_first_person ?? 0.0))", "42.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.26": ["-72.0 * (1.0 - (variable.is_first_person ?? 0.0))", "46.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.36": ["-12.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-80.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.48": ["-10.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, "-76.0 * (1.0 - (variable.is_first_person ?? 0.0))"],
+            "0.6": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    },
+    "animation.sp.inject": {
+      "loop": false,
+      "animation_length": 0.8,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["22.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.65": ["22.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0, 0.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        },
+        "leftArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-62.0 * (1.0 - (variable.is_first_person ?? 0.0))", "22.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.65": ["-62.0 * (1.0 - (variable.is_first_person ?? 0.0))", "22.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        },
+        "rightArm": {
+          "rotation": {
+            "0.0": [0.0, 0.0, 0.0],
+            "0.15": ["-50.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-40.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.35": ["-57.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-33.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.45": ["-52.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-38.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.65": ["-52.0 * (1.0 - (variable.is_first_person ?? 0.0))", "-38.0 * (1.0 - (variable.is_first_person ?? 0.0))", 0.0],
+            "0.8": [0.0, 0.0, 0.0]
+          }
+        }
+      }
+    }
+  }
+}

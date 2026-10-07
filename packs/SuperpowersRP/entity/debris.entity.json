@@ -1,0 +1,53 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "sp:debris",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "stone": "textures/blocks/stone",
+        "dirt": "textures/blocks/dirt",
+        "grass": "textures/entity/debris_grass",
+        "cobblestone": "textures/blocks/cobblestone",
+        "sand": "textures/blocks/sand",
+        "gravel": "textures/blocks/gravel",
+        "deepslate": "textures/blocks/deepslate/deepslate",
+        "oak_log": "textures/blocks/log_oak",
+        "oak_planks": "textures/blocks/planks_oak",
+        "leaves": "textures/blocks/leaves_oak_carried",
+        "netherrack": "textures/blocks/netherrack",
+        "end_stone": "textures/blocks/end_stone",
+        "snow": "textures/blocks/snow",
+        "ice": "textures/blocks/ice",
+        "obsidian": "textures/blocks/obsidian",
+        "sandstone": "textures/blocks/sandstone_normal",
+        "stone_bricks": "textures/blocks/stonebrick",
+        "clay": "textures/blocks/clay",
+        "mud": "textures/blocks/mud",
+        "blackstone": "textures/blocks/blackstone",
+        "basalt": "textures/blocks/basalt_side",
+        "tuff": "textures/blocks/tuff",
+        "red_sand": "textures/blocks/red_sand",
+        "terracotta": "textures/blocks/hardened_clay",
+        "glass": "textures/blocks/glass",
+        "iron_block": "textures/blocks/iron_block",
+        "magma": "textures/entity/debris_magma",
+        "meteorite": "textures/blocks/sp_meteorite"
+      },
+      "geometry": {
+        "default": "geometry.sp.debris"
+      },
+      "scripts": {
+        "scale": "query.property('sp:size')",
+        "animate": ["tumble_controller"]
+      },
+      "animations": {
+        "tumble": "animation.sp.debris.tumble",
+        "tumble_controller": "controller.animation.sp.debris.tumble"
+      },
+      "render_controllers": ["controller.render.sp.debris"]
+    }
+  }
+}
