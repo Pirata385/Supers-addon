@@ -118,8 +118,8 @@ The action bar shows the power, the selected ability, its cooldown bar and live 
 
 | Item | Use / recipe |
 |---|---|
-| Empty Syringe | Glass + Iron Ingot + Iron Nugget |
-| Mutagen Crystal | Amethyst Shard + Glowstone Dust + Slime Ball + Redstone (also from Meteorites, mutants, labs) |
+| Empty Syringe | Iron Nugget, Glass, Iron Ingot in a diagonal line (makes 2) |
+| Mutagen Crystal | Amethyst Shard + Glowstone Dust + Slime Ball + Redstone, makes 2 (also from Meteorites, mutants, labs) |
 | Power Mutagens | Empty Syringe + Mutagen Crystal + key ingredient (Strength: Iron Block · Flight: Phantom Membrane + Feather · Heat Vision: Blaze Rod + Magma Cream · Speedster: Sugar + Redstone Block · Esper: Eye of Ender + Amethyst Shard) |
 | Unstable Mutagen | Empty Syringe + 3 Mutagen Crystals + Nether Wart |
 | Suppressor Serum | Empty Syringe + Milk Bucket + Mutagen Crystal |
