@@ -1,7 +1,7 @@
 // Test suite: Speedster — Speed Force gears (movement attribute, distance covered), passive tags,
 // plow, projectile dodge, water running, Time Dilation (mob movement + projectile velocity, restore),
 // Blitz Dash (distance, damage, fragile blocks, stops at walls) and cleanup on revoke.
-import { GameMode } from '@minecraft/server';
+import { GameMode, ItemStack } from '@minecraft/server';
 
 const NAME = 'Blur';
 const S = 'speedster';
@@ -277,6 +277,43 @@ async function suite(ctx, p) {
     ctx.assert(s.dilation === false && s.affected === 0, 'dilation end: nothing tracked any more', s);
     ctx.assert((d.cd['speedster.time_dilation'] ?? 0) > 300, 'dilation end: cooldown started', d.cd);
     remove(pig, ball);
+  }
+
+  // ---------------------------------------------------------------- Time Dilation expires on its own
+  {
+    await ctx.sp('cd', NAME);
+    await place(-60, 0);
+    const pig = ctx.spawn('minecraft:pig', -55, 0, 3);
+    await ctx.wait(3);
+    const pig0 = movement(pig);
+    r = await ctx.sp('ability', `${NAME} ${S} time_dilation force`);
+    ctx.assert(r.fired === true, 'time dilation starts (expiry run)', r);
+    d = await ctx.dump(p);
+    ctx.assert(d.data[S].dilation === true, 'dilation running', d.data[S]);
+    // a dropped item tossed sideways high in the air floats in slow motion too
+    const item = ctx.dim.spawnItem(new ItemStack('minecraft:stick', 1), ctx.at(-63, 10, -3));
+    item.applyImpulse({ x: -0.6, y: 0.1, z: 0 });
+    await ctx.wait(4);
+    const i0 = loc(item);
+    await ctx.wait(10);
+    const i1 = valid(item) ? loc(item) : i0;
+    const idisp = Math.hypot(i1.x - i0.x, i1.z - i0.z);
+    ctx.log(`dilation: dropped item moved ${idisp.toFixed(2)} blocks (dy ${(i1.y - i0.y).toFixed(2)}) in 10 ticks`);
+    ctx.assert(valid(item) && idisp > 0.1 && idisp < 2, 'dilation: dropped item drifts in slow motion (~0.7 instead of ~5 blocks)', { idisp, i0, i1 });
+    ctx.assert(Math.abs(i1.y - i0.y) < 1, 'dilation: dropped item barely falls', { dy: i1.y - i0.y });
+    // wait out the remaining duration (dilationTicks = 200)
+    let ended = false;
+    for (let t = 0; t < 220 && !ended; t += 10) {
+      await ctx.wait(10);
+      ended = (await st()).dilation === false;
+    }
+    d = await ctx.dump(p);
+    s = d.data[S];
+    const pig2 = movement(pig);
+    ctx.assert(ended && s.affected === 0, 'dilation ends by itself after dilationTicks', s);
+    ctx.assert(Math.abs(pig2 - pig0) < 1e-6, 'expiry: pig movement restored exactly', { pig0, pig2 });
+    ctx.assert((d.cd['speedster.time_dilation'] ?? 0) > 300, 'expiry: cooldown started', d.cd);
+    remove(pig, item);
   }
 
   // ---------------------------------------------------------------- Blitz Dash
