@@ -8,26 +8,43 @@
     },
     "component_groups": {
       "sp:variant_strength": {
-        "minecraft:variant": { "value": 0 },
-        "minecraft:knockback_resistance": { "value": 0.5 },
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.5
+        },
         "minecraft:damage_sensor": {
           "triggers": [
-            { "cause": "fall", "deals_damage": "no" }
+            {
+              "cause": "fall",
+              "deals_damage": "no"
+            }
           ]
         }
       },
       "sp:variant_heat_vision": {
-        "minecraft:variant": { "value": 1 },
+        "minecraft:variant": {
+          "value": 1
+        },
         "minecraft:fire_immune": {}
       },
       "sp:variant_speedster": {
-        "minecraft:variant": { "value": 2 }
+        "minecraft:variant": {
+          "value": 2
+        }
       },
       "sp:variant_esper": {
-        "minecraft:variant": { "value": 3 },
+        "minecraft:variant": {
+          "value": 3
+        },
         "minecraft:damage_sensor": {
           "triggers": [
-            { "cause": "projectile", "deals_damage": "yes", "damage_multiplier": 0.5 }
+            {
+              "cause": "projectile",
+              "deals_damage": "yes",
+              "damage_multiplier": 0.5
+            }
           ]
         }
       }
@@ -36,13 +53,29 @@
       "minecraft:is_hidden_when_invisible": {},
       "minecraft:nameable": {},
       "minecraft:type_family": {
-        "family": ["rogue_mutant", "monster", "mob"]
+        "family": [
+          "rogue_mutant",
+          "monster",
+          "mob"
+        ]
       },
-      "minecraft:variant": { "value": 0 },
-      "minecraft:collision_box": { "width": 0.6, "height": 1.9 },
-      "minecraft:health": { "value": 40, "max": 40 },
-      "minecraft:attack": { "damage": 6 },
-      "minecraft:movement": { "value": 0.26 },
+      "minecraft:variant": {
+        "value": 0
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:health": {
+        "value": 40,
+        "max": 40
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement": {
+        "value": 0.26
+      },
       "minecraft:movement.basic": {},
       "minecraft:navigation.walk": {
         "is_amphibious": true,
@@ -61,19 +94,37 @@
       },
       "minecraft:hurt_on_condition": {
         "damage_conditions": [
-          { "filters": { "test": "in_lava", "subject": "self" }, "cause": "lava", "damage_per_tick": 4 }
+          {
+            "filters": {
+              "test": "in_lava",
+              "subject": "self"
+            },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
         ]
       },
       "minecraft:physics": {},
-      "minecraft:pushable": { "is_pushable": true, "is_pushable_by_piston": true },
-      "minecraft:despawn": { "despawn_from_distance": {} },
-      "minecraft:loot": { "table": "loot_tables/entities/rogue_mutant.json" },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:loot": {
+        "table": "loot_tables/entities/rogue_mutant.json"
+      },
       "minecraft:experience_reward": {
         "on_death": "query.last_hit_by_player ? 12 + math.random_integer(0, 6) : 0"
       },
       "minecraft:conditional_bandwidth_optimization": {},
-      "minecraft:behavior.float": { "priority": 0 },
-      "minecraft:behavior.hurt_by_target": { "priority": 1 },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 1
+      },
       "minecraft:behavior.nearest_attackable_target": {
         "priority": 2,
         "must_see": true,
@@ -84,8 +135,16 @@
           {
             "filters": {
               "any_of": [
-                { "test": "is_family", "subject": "other", "value": "player" },
-                { "test": "is_family", "subject": "other", "value": "irongolem" }
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "irongolem"
+                }
               ]
             },
             "max_dist": 32
@@ -93,8 +152,16 @@
           {
             "filters": {
               "any_of": [
-                { "test": "is_family", "subject": "other", "value": "villager" },
-                { "test": "is_family", "subject": "other", "value": "wandering_trader" }
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "villager"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "wandering_trader"
+                }
               ]
             },
             "max_dist": 32,
@@ -107,23 +174,73 @@
         "speed_multiplier": 1.15,
         "track_target": true
       },
-      "minecraft:behavior.random_stroll": { "priority": 7, "speed_multiplier": 1.0 },
-      "minecraft:behavior.look_at_player": { "priority": 8, "look_distance": 8, "probability": 0.02 },
-      "minecraft:behavior.random_look_around": { "priority": 9 }
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 8,
+        "probability": 0.02
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 9
+      },
+      "minecraft:ambient_sound_interval": {
+        "value": 6.0,
+        "range": 10.0,
+        "event_name": "ambient"
+      }
     },
     "events": {
       "minecraft:entity_spawned": {
         "randomize": [
-          { "weight": 1, "trigger": "sp:become_strength" },
-          { "weight": 1, "trigger": "sp:become_heat_vision" },
-          { "weight": 1, "trigger": "sp:become_speedster" },
-          { "weight": 1, "trigger": "sp:become_esper" }
+          {
+            "weight": 1,
+            "trigger": "sp:become_strength"
+          },
+          {
+            "weight": 1,
+            "trigger": "sp:become_heat_vision"
+          },
+          {
+            "weight": 1,
+            "trigger": "sp:become_speedster"
+          },
+          {
+            "weight": 1,
+            "trigger": "sp:become_esper"
+          }
         ]
       },
-      "sp:become_strength": { "add": { "component_groups": ["sp:variant_strength"] } },
-      "sp:become_heat_vision": { "add": { "component_groups": ["sp:variant_heat_vision"] } },
-      "sp:become_speedster": { "add": { "component_groups": ["sp:variant_speedster"] } },
-      "sp:become_esper": { "add": { "component_groups": ["sp:variant_esper"] } }
+      "sp:become_strength": {
+        "add": {
+          "component_groups": [
+            "sp:variant_strength"
+          ]
+        }
+      },
+      "sp:become_heat_vision": {
+        "add": {
+          "component_groups": [
+            "sp:variant_heat_vision"
+          ]
+        }
+      },
+      "sp:become_speedster": {
+        "add": {
+          "component_groups": [
+            "sp:variant_speedster"
+          ]
+        }
+      },
+      "sp:become_esper": {
+        "add": {
+          "component_groups": [
+            "sp:variant_esper"
+          ]
+        }
+      }
     }
   }
 }

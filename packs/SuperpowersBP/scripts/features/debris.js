@@ -207,6 +207,7 @@ function tick(t) {
     if (d.state === 'held') {
       const p = d.anchor?.();
       if (!p) continue;
+      d.expires = Math.max(d.expires, t + 40); // alive while something holds it
       try {
         e.teleport(p, { keepVelocity: false });
       } catch {
