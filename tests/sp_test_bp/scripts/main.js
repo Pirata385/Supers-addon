@@ -10,9 +10,10 @@ import * as speedster from './suites/speedster.js';
 import * as esper from './suites/esper.js';
 import * as items from './suites/items.js';
 import * as multi from './suites/multi.js';
+import * as mutants from './suites/mutants.js';
 
-const ALL = { strength, flight, heat_vision, speedster, esper, items, multi };
-const ORDER = ['strength', 'flight', 'heat_vision', 'speedster', 'esper', 'items', 'multi'];
+const ALL = { strength, flight, heat_vision, speedster, esper, items, multi, mutants };
+const ORDER = ['strength', 'flight', 'heat_vision', 'speedster', 'esper', 'items', 'multi', 'mutants'];
 
 system.runTimeout(async () => {
   const dim = world.getDimension('overworld');
